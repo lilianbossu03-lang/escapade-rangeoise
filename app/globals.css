@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #efe3c9;
+  --foreground: #2d2d2d;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-lato), system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-playfair {
+    font-family: var(--font-playfair), Georgia, serif;
+  }
+
+  .font-lato {
+    font-family: var(--font-lato), system-ui, sans-serif;
+  }
+}
+
+/* React Day Picker overrides */
+.rdp {
+  --rdp-accent-color: #e3a637;
+  --rdp-background-color: #efe3c9;
+}
+
+.rdp-day_selected:not([disabled]) {
+  background-color: #e3a637;
+  color: #232951;
+}
+
+.rdp-day_today:not(.rdp-day_selected) {
+  color: #232951;
+  font-weight: bold;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #efe3c9;
+}
+::-webkit-scrollbar-thumb {
+  background: #e3a637;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #232951;
+}
