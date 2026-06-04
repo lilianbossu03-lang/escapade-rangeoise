@@ -1,6 +1,6 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { updateReservationStatut } from "@/app/admin/actions";
-import { CheckCircle2, XCircle, Clock, CalendarDays, Users, Mail, Phone, MessageSquare } from "lucide-react";
+import { CheckCircle2, XCircle, Clock, CalendarDays, Users, Mail, Phone, MessageSquare, AlertTriangle } from "lucide-react";
 
 const statutColors: Record<string, string> = {
   confirme: "bg-green-100 text-green-700",
@@ -19,7 +19,18 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
 }
 
-export default async function ReservationsPage() {
+const errorMessages: Record<string, string> = {
+  conflit_dates:
+    "Impossible de confirmer : ces dates sont déjà bloquées par une autre réservation.",
+  reservation_introuvable: "Réservation introuvable.",
+};
+
+export default async function ReservationsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const params = await searchParams;
   const supabase = createAdminClient();
   const { data: reservations } = await supabase
     .from("reservations")
@@ -31,6 +42,16 @@ export default async function ReservationsPage() {
 
   return (
     <div className="space-y-6">
+      {/* Error banner from action */}
+      {params.error && errorMessages[params.error] && (
+        <div className="bg-red-50 border border-red-200 rounded-2xl px-5 py-4 flex items-center gap-3">
+          <AlertTriangle className="w-5 h-5 text-red-500 flex-shrink-0" />
+          <p className="font-lato text-sm text-red-800 font-semibold">
+            {errorMessages[params.error]}
+          </p>
+        </div>
+      )}
+
       {/* Alert */}
       {pending.length > 0 && (
         <div className="bg-amber-50 border border-amber-200 rounded-2xl px-5 py-4 flex items-center gap-3">
