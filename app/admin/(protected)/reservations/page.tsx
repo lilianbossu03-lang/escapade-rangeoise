@@ -76,8 +76,8 @@ export default async function ReservationsPage() {
                     </div>
 
                     <div className="flex flex-wrap gap-4 text-xs text-gray-400 font-lato">
-                      <span className="flex items-center gap-1"><Mail className="w-3.5 h-3.5" />{r.email_client}</span>
-                      {r.telephone_client && <span className="flex items-center gap-1"><Phone className="w-3.5 h-3.5" />{r.telephone_client}</span>}
+                      <a href={`mailto:${r.email_client}`} className="flex items-center gap-1 hover:text-primary transition-colors min-h-[44px] py-1"><Mail className="w-3.5 h-3.5" />{r.email_client}</a>
+                      {r.telephone_client && <a href={`tel:${r.telephone_client}`} className="flex items-center gap-1 hover:text-primary transition-colors min-h-[44px] py-1"><Phone className="w-3.5 h-3.5" />{r.telephone_client}</a>}
                     </div>
 
                     {r.message && (
@@ -90,14 +90,14 @@ export default async function ReservationsPage() {
 
                   {/* Right: actions */}
                   {r.statut === "en_attente" && (
-                    <div className="flex gap-2 flex-shrink-0">
-                      <form action={async () => { "use server"; await updateReservationStatut(r.id, "confirme"); }}>
-                        <button type="submit" className="flex items-center gap-1.5 bg-green-600 text-white font-lato text-sm font-semibold px-4 py-2 rounded-xl hover:bg-green-700 transition-colors">
+                    <div className="flex sm:flex-col gap-2 flex-shrink-0 w-full sm:w-auto">
+                      <form action={async () => { "use server"; await updateReservationStatut(r.id, "confirme"); }} className="flex-1 sm:flex-none">
+                        <button type="submit" className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-green-600 text-white font-lato text-sm font-semibold px-4 py-3 sm:py-2 rounded-xl hover:bg-green-700 transition-colors min-h-[44px]">
                           <CheckCircle2 className="w-4 h-4" /> Confirmer
                         </button>
                       </form>
-                      <form action={async () => { "use server"; await updateReservationStatut(r.id, "refuse"); }}>
-                        <button type="submit" className="flex items-center gap-1.5 bg-red-600 text-white font-lato text-sm font-semibold px-4 py-2 rounded-xl hover:bg-red-700 transition-colors">
+                      <form action={async () => { "use server"; await updateReservationStatut(r.id, "refuse"); }} className="flex-1 sm:flex-none">
+                        <button type="submit" className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-red-600 text-white font-lato text-sm font-semibold px-4 py-3 sm:py-2 rounded-xl hover:bg-red-700 transition-colors min-h-[44px]">
                           <XCircle className="w-4 h-4" /> Refuser
                         </button>
                       </form>

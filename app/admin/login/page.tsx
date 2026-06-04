@@ -61,7 +61,7 @@ export default function LoginPage() {
                   required
                   placeholder="admin@escapade.fr"
                   defaultValue=""
-                  className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl font-lato text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl font-lato text-base focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
                 />
               </div>
             </div>
@@ -78,7 +78,7 @@ export default function LoginPage() {
                   name="password"
                   required
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-11 py-3 border border-gray-200 rounded-xl font-lato text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
+                  className="w-full pl-10 pr-11 py-3 border border-gray-200 rounded-xl font-lato text-base focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
                 />
                 <button
                   type="button"

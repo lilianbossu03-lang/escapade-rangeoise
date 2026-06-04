@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Lato } from "next/font/google";
 import "./globals.css";
 
@@ -14,6 +14,13 @@ const lato = Lato({
   weight: ["300", "400", "700", "900"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   icons: {
@@ -49,7 +56,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${playfair.variable} ${lato.variable} font-lato antialiased bg-blanc-casse text-text-dark`}
+        className={`${playfair.variable} ${lato.variable} font-lato antialiased bg-blanc-casse text-text-dark overflow-x-hidden`}
       >
         {children}
       </body>

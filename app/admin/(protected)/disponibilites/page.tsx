@@ -38,23 +38,23 @@ export default async function DisponibilitesPage() {
         >
           <div>
             <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Logement</label>
-            <select name="logement_id" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-sm focus:outline-none focus:border-gold">
+            <select name="logement_id" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold">
               <option value="">Choisir...</option>
               {logementList.map((l) => <option key={l.id} value={l.id}>{l.nom}</option>)}
             </select>
           </div>
           <div>
             <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Date de début</label>
-            <input type="date" name="date_debut" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-sm focus:outline-none focus:border-gold" />
+            <input type="date" name="date_debut" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
           </div>
           <div>
             <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Date de fin</label>
-            <input type="date" name="date_fin" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-sm focus:outline-none focus:border-gold" />
+            <input type="date" name="date_fin" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
           </div>
           <div>
             <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Motif</label>
             <div className="flex gap-2">
-              <input type="text" name="motif" placeholder="Réservé" className="flex-1 border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-sm focus:outline-none focus:border-gold" />
+              <input type="text" name="motif" placeholder="Réservé" className="flex-1 border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
               <button type="submit" className="bg-primary text-white font-lato text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-secondary transition-colors flex-shrink-0">
                 Bloquer
               </button>

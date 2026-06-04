@@ -48,33 +48,33 @@ export default async function EvenementsAdminPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="sm:col-span-2">
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Titre *</label>
-              <input type="text" name="titre" required placeholder="Nom de l'événement" className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-sm focus:outline-none focus:border-gold" />
+              <input type="text" name="titre" required placeholder="Nom de l'événement" className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
             </div>
             <div>
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Date de début *</label>
-              <input type="date" name="date" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-sm focus:outline-none focus:border-gold" />
+              <input type="date" name="date" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
             </div>
             <div>
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Date de fin</label>
-              <input type="date" name="date_fin" className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-sm focus:outline-none focus:border-gold" />
+              <input type="date" name="date_fin" className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
             </div>
             <div>
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Lieu *</label>
-              <input type="text" name="lieu" required placeholder="Berck-sur-Mer" className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-sm focus:outline-none focus:border-gold" />
+              <input type="text" name="lieu" required placeholder="Berck-sur-Mer" className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
             </div>
             <div>
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Catégorie *</label>
-              <select name="categorie" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-sm focus:outline-none focus:border-gold">
+              <select name="categorie" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold">
                 {categories.map((c) => <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>)}
               </select>
             </div>
             <div className="sm:col-span-2">
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Description *</label>
-              <textarea name="description" required rows={3} className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-sm focus:outline-none focus:border-gold resize-none" />
+              <textarea name="description" required rows={3} className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold resize-none" />
             </div>
             <div>
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">URL (optionnel)</label>
-              <input type="url" name="url" placeholder="https://..." className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-sm focus:outline-none focus:border-gold" />
+              <input type="url" name="url" placeholder="https://..." className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
             </div>
           </div>
           <button type="submit" className="bg-primary text-white font-lato text-sm font-semibold px-6 py-2.5 rounded-xl hover:bg-secondary transition-colors">

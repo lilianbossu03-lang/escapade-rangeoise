@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 import { DayPicker } from "react-day-picker";
 import type { DateRange } from "react-day-picker";
 import { fr } from "date-fns/locale";
@@ -28,6 +28,14 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
   const [nom, setNom] = useState("");
   const [prix, setPrix] = useState("");
   const [isPending, startTransition] = useTransition();
+  const [nbMonths, setNbMonths] = useState(1);
+
+  useEffect(() => {
+    const check = () => setNbMonths(window.innerWidth >= 768 ? 2 : 1);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const activeLogement = logements.find((l) => l.id === activeId);
   const lPeriodes = periodes
@@ -143,7 +151,7 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
               selected={range}
               onSelect={setRange}
               locale={fr}
-              numberOfMonths={2}
+              numberOfMonths={nbMonths}
               modifiers={{ higher: daysHigher, lower: daysLower }}
               modifiersStyles={{
                 higher: {
@@ -179,7 +187,7 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
                   onChange={(e) => setNom(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleConfirm()}
                   placeholder="Nom (ex : Été 2026, Noël…)"
-                  className="flex-1 min-w-40 border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-sm focus:outline-none focus:border-gold"
+                  className="flex-1 min-w-40 border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold"
                 />
                 <div className="relative">
                   <Euro className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
@@ -191,7 +199,7 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
                     placeholder="Prix / nuit"
                     min={0}
                     step={1}
-                    className="w-32 pl-8 pr-3 py-2.5 border border-gray-200 rounded-xl font-lato text-sm focus:outline-none focus:border-gold"
+                    className="w-32 pl-8 pr-3 py-2.5 border border-gray-200 rounded-xl font-lato text-base focus:outline-none focus:border-gold"
                   />
                 </div>
                 <button
@@ -287,7 +295,7 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
                     <button
                       onClick={() => handleDelete(p.id)}
                       disabled={isPending}
-                      className="text-gray-200 group-hover:text-gray-400 hover:!text-red-500 transition-colors p-1.5 rounded-lg hover:bg-red-50 flex-shrink-0 mt-0.5"
+                      className="text-gray-300 group-hover:text-gray-400 hover:!text-red-500 transition-colors p-2 rounded-lg hover:bg-red-50 flex-shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>

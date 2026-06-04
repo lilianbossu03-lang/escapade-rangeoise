@@ -1,5 +1,6 @@
 import AdminSidebar from "./_components/AdminSidebar";
 import AdminHeader from "./_components/AdminHeader";
+import { SidebarProvider } from "./_components/AdminSidebarContext";
 
 export const metadata = {
   title: "Administration — L'Escapade Rangeoise",
@@ -12,12 +13,16 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      <AdminSidebar />
-      <div className="flex-1 flex flex-col min-w-0" style={{ marginLeft: "256px" }}>
-        <AdminHeader />
-        <main className="flex-1 p-6 lg:p-8 overflow-auto">{children}</main>
+    <SidebarProvider>
+      <div className="min-h-[100dvh] bg-gray-50">
+        <AdminSidebar />
+        <div className="lg:ml-64 flex flex-col min-h-[100dvh]">
+          <AdminHeader />
+          <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-auto">
+            {children}
+          </main>
+        </div>
       </div>
-    </div>
+    </SidebarProvider>
   );
 }

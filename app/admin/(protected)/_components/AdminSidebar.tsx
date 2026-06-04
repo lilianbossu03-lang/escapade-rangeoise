@@ -11,56 +11,28 @@ import {
   UtensilsCrossed,
   ExternalLink,
   Tags,
+  X,
 } from "lucide-react";
 import Image from "next/image";
+import { useSidebar } from "./AdminSidebarContext";
 
 const navItems = [
-  {
-    label: "Dashboard",
-    href: "/admin",
-    icon: LayoutDashboard,
-    exact: true,
-  },
-  {
-    label: "Logements",
-    href: "/admin/logements",
-    icon: Home,
-  },
-  {
-    label: "Disponibilités",
-    href: "/admin/disponibilites",
-    icon: CalendarDays,
-  },
-  {
-    label: "Réservations",
-    href: "/admin/reservations",
-    icon: ClipboardList,
-  },
-  {
-    label: "Événements",
-    href: "/admin/evenements",
-    icon: PartyPopper,
-  },
-  {
-    label: "Restaurants",
-    href: "/admin/restaurants",
-    icon: UtensilsCrossed,
-  },
-  {
-    label: "Tarifs",
-    href: "/admin/tarifs",
-    icon: Tags,
-  },
+  { label: "Dashboard", href: "/admin", icon: LayoutDashboard, exact: true },
+  { label: "Logements", href: "/admin/logements", icon: Home },
+  { label: "Disponibilités", href: "/admin/disponibilites", icon: CalendarDays },
+  { label: "Réservations", href: "/admin/reservations", icon: ClipboardList },
+  { label: "Événements", href: "/admin/evenements", icon: PartyPopper },
+  { label: "Restaurants", href: "/admin/restaurants", icon: UtensilsCrossed },
+  { label: "Tarifs", href: "/admin/tarifs", icon: Tags },
 ];
 
-export default function AdminSidebar() {
+function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
   const pathname = usePathname();
-
   const isActive = (href: string, exact = false) =>
     exact ? pathname === href : pathname.startsWith(href);
 
   return (
-    <aside className="fixed top-0 left-0 h-screen w-64 bg-primary text-white flex flex-col z-30 shadow-xl">
+    <>
       {/* Logo */}
       <div className="px-6 py-5 border-b border-white/10">
         <Image
@@ -81,7 +53,8 @@ export default function AdminSidebar() {
             <Link
               key={href}
               href={href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl font-lato text-sm font-medium transition-all duration-150 ${
+              onClick={onLinkClick}
+              className={`flex items-center gap-3 px-4 py-3.5 rounded-xl font-lato text-sm font-medium transition-all duration-150 min-h-[44px] ${
                 active
                   ? "bg-gold text-primary"
                   : "text-white/70 hover:bg-white/10 hover:text-white"
@@ -99,12 +72,54 @@ export default function AdminSidebar() {
         <Link
           href="/"
           target="_blank"
-          className="flex items-center gap-3 px-3 py-2.5 rounded-xl font-lato text-xs text-white/50 hover:text-white hover:bg-white/10 transition-all"
+          onClick={onLinkClick}
+          className="flex items-center gap-3 px-4 py-3.5 rounded-xl font-lato text-xs text-white/50 hover:text-white hover:bg-white/10 transition-all min-h-[44px]"
         >
           <ExternalLink className="w-4 h-4" />
           Voir le site public
         </Link>
       </div>
-    </aside>
+    </>
+  );
+}
+
+export default function AdminSidebar() {
+  const { isOpen, close } = useSidebar();
+
+  return (
+    <>
+      {/* ── Desktop sidebar (lg+) ─────────────────────────────────────── */}
+      <aside className="hidden lg:flex fixed top-0 left-0 h-screen w-64 bg-primary text-white flex-col z-30 shadow-xl">
+        <SidebarContent />
+      </aside>
+
+      {/* ── Mobile overlay ────────────────────────────────────────────── */}
+      {isOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
+          onClick={close}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* ── Mobile drawer ─────────────────────────────────────────────── */}
+      <aside
+        className={`lg:hidden fixed top-0 left-0 h-screen w-[280px] max-w-[80vw] bg-primary text-white flex flex-col z-50 shadow-2xl transition-transform duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+        aria-label="Menu de navigation"
+      >
+        {/* Close button */}
+        <button
+          onClick={close}
+          className="absolute top-4 right-4 text-white/60 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+          aria-label="Fermer le menu"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        <SidebarContent onLinkClick={close} />
+      </aside>
+    </>
   );
 }
