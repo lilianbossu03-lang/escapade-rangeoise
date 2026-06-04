@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { DayPicker } from "react-day-picker";
@@ -52,6 +52,14 @@ interface Props {
 export default function LogementDetail({ logement, dates_bloquees = [], periodes_tarifaires = [] }: Props) {
   const [currentPhoto, setCurrentPhoto] = useState(0);
   const [selectedRange, setSelectedRange] = useState<{ from: Date; to: Date } | null>(null);
+  const [nbMonths, setNbMonths] = useState(1);
+
+  useEffect(() => {
+    const check = () => setNbMonths(window.innerWidth >= 640 ? 2 : 1);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const blockedDays = dates_bloquees
     .flatMap((d) =>
@@ -80,7 +88,7 @@ export default function LogementDetail({ logement, dates_bloquees = [], periodes
   };
 
   return (
-    <div className="min-h-screen bg-sand">
+    <div className="min-h-[100dvh] bg-sand">
       {/* Back nav */}
       <div className="bg-primary text-white py-4 px-4 sm:px-6 lg:px-8 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -96,7 +104,7 @@ export default function LogementDetail({ logement, dates_bloquees = [], periodes
           </span>
           <button
             onClick={handleReserve}
-            className="bg-gold text-primary font-lato text-sm font-semibold px-4 py-2 rounded-full hover:bg-[#cc9430] transition-all"
+            className="bg-gold text-primary font-lato text-sm font-semibold px-4 py-2.5 rounded-full hover:bg-[#cc9430] transition-all min-h-[44px] flex items-center"
           >
             Réserver
           </button>
@@ -126,13 +134,15 @@ export default function LogementDetail({ logement, dates_bloquees = [], periodes
               <>
                 <button
                   onClick={prevPhoto}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 text-primary p-2.5 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
+                  className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 bg-white/90 text-primary p-2.5 rounded-full shadow-lg opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity hover:bg-white min-h-[44px] min-w-[44px] flex items-center justify-center"
+                  aria-label="Photo précédente"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button
                   onClick={nextPhoto}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 text-primary p-2.5 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
+                  className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 bg-white/90 text-primary p-2.5 rounded-full shadow-lg opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity hover:bg-white min-h-[44px] min-w-[44px] flex items-center justify-center"
+                  aria-label="Photo suivante"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
@@ -279,7 +289,7 @@ export default function LogementDetail({ logement, dates_bloquees = [], periodes
                         textDecoration: "line-through",
                       },
                     }}
-                    numberOfMonths={2}
+                    numberOfMonths={nbMonths}
                   />
                 </div>
                 <div className="flex gap-4 mt-2 text-xs font-lato text-gray-500">

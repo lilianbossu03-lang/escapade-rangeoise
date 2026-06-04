@@ -329,7 +329,7 @@ export default function ReservationForm({
                               [key]: Math.max(min, f[key] - 1),
                             }))
                           }
-                          className="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center hover:border-gold hover:text-gold transition-colors disabled:opacity-30"
+                          className="w-10 h-10 rounded-full border-2 border-gray-200 flex items-center justify-center hover:border-gold hover:text-gold transition-colors disabled:opacity-30 min-h-[44px] min-w-[44px]"
                           disabled={formData[key] <= min}
                         >
                           <Minus className="w-3 h-3" />
@@ -342,7 +342,7 @@ export default function ReservationForm({
                           onClick={() =>
                             setFormData((f) => ({ ...f, [key]: f[key] + 1 }))
                           }
-                          className="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center hover:border-gold hover:text-gold transition-colors"
+                          className="w-10 h-10 rounded-full border-2 border-gray-200 flex items-center justify-center hover:border-gold hover:text-gold transition-colors min-h-[44px] min-w-[44px]"
                         >
                           <Plus className="w-3 h-3" />
                         </button>
@@ -379,7 +379,7 @@ export default function ReservationForm({
                         onChange={(e) =>
                           setFormData((f) => ({ ...f, nom: e.target.value }))
                         }
-                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl font-lato text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
+                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl font-lato text-base focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
                       />
                     </div>
                   </div>
@@ -397,7 +397,7 @@ export default function ReservationForm({
                         onChange={(e) =>
                           setFormData((f) => ({ ...f, email: e.target.value }))
                         }
-                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl font-lato text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
+                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl font-lato text-base focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
                       />
                     </div>
                   </div>
@@ -409,12 +409,13 @@ export default function ReservationForm({
                       <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <input
                         type="tel"
+                        inputMode="tel"
                         placeholder="06 12 34 56 78"
                         value={formData.telephone}
                         onChange={(e) =>
                           setFormData((f) => ({ ...f, telephone: e.target.value }))
                         }
-                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl font-lato text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
+                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl font-lato text-base focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
                       />
                     </div>
                   </div>
@@ -432,7 +433,7 @@ export default function ReservationForm({
                       onChange={(e) =>
                         setFormData((f) => ({ ...f, message: e.target.value }))
                       }
-                      className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl font-lato text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors resize-none"
+                      className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl font-lato text-base focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors resize-none"
                     />
                   </div>
                 </div>

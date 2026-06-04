@@ -18,7 +18,7 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative w-full h-screen overflow-hidden flex items-center justify-center"
+      className="relative w-full min-h-[100dvh] overflow-hidden flex items-center justify-center"
     >
       {/* Background image with parallax */}
       <motion.div
@@ -30,6 +30,8 @@ export default function Hero() {
           src="/hero.jpg"
           alt="Vue aérienne de Berck-sur-Mer, Côte d'Opale"
           className="w-full h-full object-cover scale-110"
+          // @ts-ignore
+          fetchpriority="high"
         />
       </motion.div>
 
@@ -83,7 +85,7 @@ export default function Hero() {
         >
           <button
             onClick={scrollToLogements}
-            className="bg-gold text-primary font-lato font-semibold text-lg px-8 py-4 rounded-full hover:bg-[#cc9430] transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg"
+            className="w-full sm:w-auto bg-gold text-primary font-lato font-semibold text-lg px-8 py-4 rounded-full hover:bg-[#cc9430] transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg min-h-[44px]"
           >
             Découvrir nos logements
           </button>
@@ -92,7 +94,7 @@ export default function Hero() {
               const el = document.getElementById("reservation");
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
-            className="border-2 border-white text-white font-lato font-semibold text-lg px-8 py-4 rounded-full hover:bg-white hover:text-primary transition-all duration-200"
+            className="w-full sm:w-auto border-2 border-white text-white font-lato font-semibold text-lg px-8 py-4 rounded-full hover:bg-white hover:text-primary transition-all duration-200 min-h-[44px]"
           >
             Réserver maintenant
           </button>

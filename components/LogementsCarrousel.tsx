@@ -24,6 +24,7 @@ function LogementCard({ logement }: { logement: Logement }) {
           src={logement.photo_principale}
           alt={logement.nom}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
         <span className="absolute top-4 right-4 bg-gold text-primary text-sm font-semibold px-3 py-1 rounded-full">

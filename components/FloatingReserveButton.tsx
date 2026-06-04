@@ -25,7 +25,8 @@ export default function FloatingReserveButton() {
       {visible && (
         <motion.button
           onClick={handleClick}
-          className="md:hidden fixed bottom-6 right-6 z-40 bg-gold text-primary font-lato font-bold px-5 py-3.5 rounded-full shadow-2xl flex items-center gap-2"
+          className="md:hidden fixed right-6 z-40 bg-gold text-primary font-lato font-bold px-5 py-3.5 rounded-full shadow-2xl flex items-center gap-2 min-h-[44px]"
+        style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 1.5rem)" }}
           initial={{ opacity: 0, scale: 0.8, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}

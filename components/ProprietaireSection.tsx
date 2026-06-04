@@ -28,6 +28,7 @@ export default function ProprietaireSection({ contenu_site }: { contenu_site: Pi
                   src={contenu_site.qui_suis_je_photo}
                   alt="Sandra, propriétaire de L'Escapade Rangeoise"
                   className="w-full h-80 lg:h-[500px] object-cover"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
               </div>
