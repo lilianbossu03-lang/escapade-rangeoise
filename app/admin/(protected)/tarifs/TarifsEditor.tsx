@@ -7,7 +7,8 @@ import { fr } from "date-fns/locale";
 import { parseISO, eachDayOfInterval, format } from "date-fns";
 import { createPeriodeTarifaire, deletePeriodeTarifaire } from "@/app/admin/actions";
 import type { PeriodeTarifaire } from "@/types";
-import { Trash2, Check, X, Euro, Loader2 } from "lucide-react";
+import { checkPeriodeOverlap } from "@/lib/validations/periodes-tarifaires";
+import { Trash2, Check, X, Euro, Loader2, AlertTriangle } from "lucide-react";
 import "react-day-picker/dist/style.css";
 
 interface Logement {
@@ -29,6 +30,7 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
   const [prix, setPrix] = useState("");
   const [isPending, startTransition] = useTransition();
   const [nbMonths, setNbMonths] = useState(1);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     const check = () => setNbMonths(window.innerWidth >= 768 ? 2 : 1);
@@ -61,10 +63,21 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
     }
   }
 
+  // Real-time overlap detection as the user selects dates
+  const overlapWarning: PeriodeTarifaire | null =
+    range?.from && range?.to
+      ? checkPeriodeOverlap(
+          lPeriodes,
+          format(range.from, "yyyy-MM-dd"),
+          format(range.to, "yyyy-MM-dd")
+        )
+      : null;
+
   const resetSelection = () => {
     setRange(undefined);
     setNom("");
     setPrix("");
+    setSubmitError(null);
   };
 
   const handleTabChange = (id: string) => {
@@ -76,7 +89,9 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
     if (!range?.from || !range?.to || !nom.trim() || !prix) return;
     const prixNum = parseFloat(prix);
     if (isNaN(prixNum) || prixNum < 0) return;
+    if (overlapWarning) return; // blocked by real-time check
 
+    setSubmitError(null);
     const newData = {
       logement_id: activeId,
       nom: nom.trim(),
@@ -86,7 +101,11 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
     };
 
     startTransition(async () => {
-      await createPeriodeTarifaire(newData);
+      const result = await createPeriodeTarifaire(newData);
+      if (!result.success) {
+        setSubmitError(result.error);
+        return;
+      }
       // Optimistic add
       setPeriodes((prev) => [
         ...prev,
@@ -180,6 +199,25 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
                   {format(range.to, "d MMMM yyyy", { locale: fr })}
                 </span>
               </p>
+
+              {/* Real-time overlap warning */}
+              {overlapWarning && (
+                <div className="mb-3 flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5">
+                  <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                  <p className="font-lato text-xs text-amber-700">
+                    Chevauchement avec <strong>{overlapWarning.nom}</strong> ({overlapWarning.date_debut} → {overlapWarning.date_fin}). Ajustez les dates.
+                  </p>
+                </div>
+              )}
+
+              {/* Server-side error */}
+              {submitError && (
+                <div className="mb-3 flex items-start gap-2 bg-red-50 border border-red-200 rounded-xl px-3 py-2.5">
+                  <AlertTriangle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                  <p className="font-lato text-xs text-red-700">{submitError}</p>
+                </div>
+              )}
+
               <div className="flex gap-3 flex-wrap items-center">
                 <input
                   type="text"
@@ -204,7 +242,7 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
                 </div>
                 <button
                   onClick={handleConfirm}
-                  disabled={!nom.trim() || !prix || isPending}
+                  disabled={!nom.trim() || !prix || isPending || !!overlapWarning}
                   className="flex items-center gap-1.5 bg-primary text-white font-lato text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-secondary transition-colors disabled:opacity-50"
                 >
                   <Check className="w-4 h-4" />
