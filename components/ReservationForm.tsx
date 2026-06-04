@@ -18,7 +18,7 @@ import {
   User,
   MessageSquare,
 } from "lucide-react";
-import { submitReservation } from "@/app/admin/actions";
+import { submitReservation, type SubmitReservationResult } from "@/app/admin/actions";
 import { Logement, DateBloquee, PeriodeTarifaire } from "@/types";
 import { getPrixParJour, calculerTotal, getBreakdown } from "@/lib/pricing";
 import "react-day-picker/dist/style.css";
@@ -55,6 +55,8 @@ export default function ReservationForm({
   const [blockedDays, setBlockedDays] = useState<Date[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [globalError, setGlobalError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!formData.logement_id) {
@@ -74,16 +76,20 @@ export default function ReservationForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFormErrors({});
+    setGlobalError(null);
+
     if (!range?.from || !range?.to) {
-      alert("Veuillez sélectionner vos dates de séjour.");
+      setFormErrors({ date_arrivee: "Veuillez sélectionner vos dates de séjour." });
       return;
     }
     if (totalNights < 2) {
-      alert("La durée minimale de séjour est de 2 nuits.");
+      setFormErrors({ date_depart: "La durée minimale de séjour est de 2 nuits." });
       return;
     }
+
     setLoading(true);
-    const { error } = await submitReservation({
+    const result: SubmitReservationResult = await submitReservation({
       logement_id: formData.logement_id,
       logement_nom: selectedLogement?.nom ?? "",
       date_arrivee: format(range.from, "yyyy-MM-dd"),
@@ -96,8 +102,10 @@ export default function ReservationForm({
       message: formData.message,
     });
     setLoading(false);
-    if (error) {
-      alert("Une erreur est survenue. Veuillez réessayer.");
+
+    if (!result.success) {
+      if (result.errors) setFormErrors(result.errors);
+      if (result.globalError) setGlobalError(result.globalError);
       return;
     }
     setSubmitted(true);
@@ -306,6 +314,9 @@ export default function ReservationForm({
                   <Users className="w-5 h-5 text-gold" />
                   Nombre de voyageurs
                 </h3>
+                {formErrors.nb_adultes && (
+                  <p className="mb-2 font-lato text-xs text-red-600 bg-red-50 border border-red-200 rounded-xl px-3 py-2">{formErrors.nb_adultes}</p>
+                )}
                 <div className="grid grid-cols-2 gap-6">
                   {[
                     { label: "Adultes", key: "nb_adultes" as const, min: 1 },
@@ -379,9 +390,12 @@ export default function ReservationForm({
                         onChange={(e) =>
                           setFormData((f) => ({ ...f, nom: e.target.value }))
                         }
-                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl font-lato text-base focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
+                        className={`w-full pl-10 pr-4 py-3 border rounded-xl font-lato text-base focus:outline-none focus:ring-1 transition-colors ${formErrors.nom_client ? "border-red-400 focus:border-red-400 focus:ring-red-200" : "border-gray-200 focus:border-gold focus:ring-gold"}`}
                       />
                     </div>
+                    {formErrors.nom_client && (
+                      <p className="mt-1 font-lato text-xs text-red-600">{formErrors.nom_client}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block font-lato text-sm font-semibold text-gray-700 mb-1.5">
@@ -397,9 +411,12 @@ export default function ReservationForm({
                         onChange={(e) =>
                           setFormData((f) => ({ ...f, email: e.target.value }))
                         }
-                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl font-lato text-base focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
+                        className={`w-full pl-10 pr-4 py-3 border rounded-xl font-lato text-base focus:outline-none focus:ring-1 transition-colors ${formErrors.email_client ? "border-red-400 focus:border-red-400 focus:ring-red-200" : "border-gray-200 focus:border-gold focus:ring-gold"}`}
                       />
                     </div>
+                    {formErrors.email_client && (
+                      <p className="mt-1 font-lato text-xs text-red-600">{formErrors.email_client}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block font-lato text-sm font-semibold text-gray-700 mb-1.5">
@@ -415,9 +432,12 @@ export default function ReservationForm({
                         onChange={(e) =>
                           setFormData((f) => ({ ...f, telephone: e.target.value }))
                         }
-                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl font-lato text-base focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
+                        className={`w-full pl-10 pr-4 py-3 border rounded-xl font-lato text-base focus:outline-none focus:ring-1 transition-colors ${formErrors.telephone_client ? "border-red-400 focus:border-red-400 focus:ring-red-200" : "border-gray-200 focus:border-gold focus:ring-gold"}`}
                       />
                     </div>
+                    {formErrors.telephone_client && (
+                      <p className="mt-1 font-lato text-xs text-red-600">{formErrors.telephone_client}</p>
+                    )}
                   </div>
                 </div>
                 <div className="mt-4">
@@ -500,6 +520,11 @@ export default function ReservationForm({
                         Séjour minimum de 2 nuits — veuillez sélectionner une date de départ plus tardive.
                       </p>
                     )}
+                    {(formErrors.date_arrivee || formErrors.date_depart) && (
+                      <p className="mt-3 text-xs font-lato font-semibold text-red-600 bg-red-50 border border-red-200 rounded-xl px-3 py-2">
+                        {formErrors.date_arrivee || formErrors.date_depart}
+                      </p>
+                    )}
                   </>
                 )}
               </motion.div>
@@ -563,6 +588,13 @@ export default function ReservationForm({
                     </p>
                   </div>
                 </motion.div>
+              )}
+
+              {/* Global error banner */}
+              {globalError && (
+                <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+                  <p className="font-lato text-sm text-red-700 font-semibold">{globalError}</p>
+                </div>
               )}
 
               {/* Submit button */}
