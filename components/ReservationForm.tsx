@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { DayPicker, DateRange } from "react-day-picker";
 import { fr } from "date-fns/locale";
-import { format, parseISO, eachDayOfInterval } from "date-fns";
+import { format, parseISO, eachDayOfInterval, isValid } from "date-fns";
 import {
   Users,
   Plus,
@@ -42,8 +43,25 @@ export default function ReservationForm({
   dates_bloquees: DateBloquee[];
   periodes_tarifaires?: PeriodeTarifaire[];
 }) {
+  const searchParams = useSearchParams();
+
+  // Read preselection from query params (set by LogementDetail "Réserver ce logement")
+  const prelogement = searchParams.get("logement") ?? "";
+  const prearrivee = searchParams.get("arrivee") ?? "";
+  const predepart = searchParams.get("depart") ?? "";
+
+  const validPrelogement = logements.find((l) => l.id === prelogement)?.id ?? "";
+
+  const initialRange = (): DateRange | undefined => {
+    if (!prearrivee || !predepart) return undefined;
+    const from = new Date(prearrivee);
+    const to = new Date(predepart);
+    if (!isValid(from) || !isValid(to) || to <= from) return undefined;
+    return { from, to };
+  };
+
   const [formData, setFormData] = useState<FormData>({
-    logement_id: "",
+    logement_id: validPrelogement,
     nom: "",
     email: "",
     telephone: "",
@@ -51,12 +69,14 @@ export default function ReservationForm({
     nb_enfants: 0,
     message: "",
   });
-  const [range, setRange] = useState<DateRange | undefined>();
+  const [range, setRange] = useState<DateRange | undefined>(initialRange);
   const [blockedDays, setBlockedDays] = useState<Date[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [globalError, setGlobalError] = useState<string | null>(null);
+  // Tracks if current logement_id came from preselection (for badge display)
+  const [isPreselected, setIsPreselected] = useState(!!validPrelogement);
 
   useEffect(() => {
     if (!formData.logement_id) {
@@ -264,6 +284,20 @@ export default function ReservationForm({
                   <Home className="w-5 h-5 text-gold" />
                   Choisissez votre logement
                 </h3>
+
+                {/* Preselection badge */}
+                {isPreselected && formData.logement_id && (
+                  <div className="flex items-center gap-2 mb-4 bg-gold/10 border border-gold/20 rounded-xl px-4 py-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-gold flex-shrink-0" />
+                    <p className="font-lato text-sm text-primary">
+                      Logement pré-sélectionné :{" "}
+                      <strong>
+                        {logements.find((l) => l.id === formData.logement_id)?.nom}
+                      </strong>
+                    </p>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {logements.map((l) => (
                     <label
@@ -279,9 +313,10 @@ export default function ReservationForm({
                         name="logement"
                         value={l.id}
                         className="sr-only"
-                        onChange={() =>
-                          setFormData((f) => ({ ...f, logement_id: l.id }))
-                        }
+                        onChange={() => {
+                          setFormData((f) => ({ ...f, logement_id: l.id }));
+                          setIsPreselected(false);
+                        }}
                       />
                       <div className="relative h-20 rounded-lg overflow-hidden mb-2">
                         {/* eslint-disable-next-line @next/next/no-img-element */}

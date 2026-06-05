@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { DayPicker } from "react-day-picker";
 import { fr } from "date-fns/locale";
-import { parseISO, eachDayOfInterval } from "date-fns";
+import { parseISO, eachDayOfInterval, format } from "date-fns";
 import {
   ArrowLeft,
   Users,
@@ -50,6 +51,7 @@ interface Props {
 }
 
 export default function LogementDetail({ logement, dates_bloquees = [], periodes_tarifaires = [] }: Props) {
+  const router = useRouter();
   const [currentPhoto, setCurrentPhoto] = useState(0);
   const [selectedRange, setSelectedRange] = useState<{ from: Date; to: Date } | null>(null);
   const [nbMonths, setNbMonths] = useState(1);
@@ -83,8 +85,12 @@ export default function LogementDetail({ logement, dates_bloquees = [], periodes
     setCurrentPhoto((c) => (c === logement.photos.length - 1 ? 0 : c + 1));
 
   const handleReserve = () => {
-    const url = `/?logement=${logement.id}#reservation`;
-    window.location.href = url;
+    const params = new URLSearchParams({ logement: logement.id });
+    if (selectedRange?.from && selectedRange?.to) {
+      params.set("arrivee", format(selectedRange.from, "yyyy-MM-dd"));
+      params.set("depart", format(selectedRange.to, "yyyy-MM-dd"));
+    }
+    router.push(`/?${params.toString()}#reservation`);
   };
 
   return (

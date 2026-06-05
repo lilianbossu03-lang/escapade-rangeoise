@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import LogementsCarrousel from "@/components/LogementsCarrousel";
@@ -132,7 +133,9 @@ export default async function Home() {
       <EvenementsSection evenements={evenements} />
       <ProprietaireSection contenu_site={contenu} />
       <RestaurantsSection restaurants={restaurants} />
-      <ReservationForm logements={logements} dates_bloquees={dates_bloquees} periodes_tarifaires={periodes_tarifaires} />
+      <Suspense fallback={<div id="reservation" className="py-20 bg-sand" />}>
+        <ReservationForm logements={logements} dates_bloquees={dates_bloquees} periodes_tarifaires={periodes_tarifaires} />
+      </Suspense>
       <Footer />
       <FloatingReserveButton />
     </main>
