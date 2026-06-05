@@ -177,7 +177,7 @@ export default async function Home() {
   const restaurantsSchemas = getRestaurantsSchema(restaurants);
 
   return (
-    <main>
+    <main id="main-content">
       <JsonLd schema={lodgingSchema} />
       <JsonLd schema={organizationSchema} />
       {evenements.length > 0 && <JsonLd schema={eventsSchema} />}

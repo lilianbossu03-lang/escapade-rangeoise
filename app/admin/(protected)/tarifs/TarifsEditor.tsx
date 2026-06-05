@@ -225,7 +225,7 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
                   onChange={(e) => setNom(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleConfirm()}
                   placeholder="Nom (ex : Été 2026, Noël…)"
-                  className="flex-1 min-w-40 border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold"
+                  className="flex-1 min-w-40 border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold"
                 />
                 <div className="relative">
                   <Euro className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
@@ -237,7 +237,7 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
                     placeholder="Prix / nuit"
                     min={0}
                     step={1}
-                    className="w-32 pl-8 pr-3 py-2.5 border border-gray-200 rounded-xl font-lato text-base focus:outline-none focus:border-gold"
+                    className="w-32 pl-8 pr-3 py-2.5 border border-gray-200 rounded-xl font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold"
                   />
                 </div>
                 <button

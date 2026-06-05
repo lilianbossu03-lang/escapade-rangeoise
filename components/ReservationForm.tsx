@@ -369,6 +369,7 @@ export default function ReservationForm({
                       <div className="flex items-center gap-3">
                         <button
                           type="button"
+                          aria-label={`Réduire le nombre d'${label.toLowerCase()}`}
                           onClick={() =>
                             setFormData((f) => ({
                               ...f,
@@ -385,6 +386,7 @@ export default function ReservationForm({
                         </span>
                         <button
                           type="button"
+                          aria-label={`Augmenter le nombre d'${label.toLowerCase()}`}
                           onClick={() =>
                             setFormData((f) => ({ ...f, [key]: f[key] + 1 }))
                           }

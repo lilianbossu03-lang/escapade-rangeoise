@@ -41,15 +41,15 @@ export default async function RestaurantsAdminPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Nom *</label>
-              <input type="text" name="nom" required placeholder="Nom du restaurant" className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
+              <input type="text" name="nom" required placeholder="Nom du restaurant" className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold" />
             </div>
             <div>
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Type de cuisine *</label>
-              <input type="text" name="type_cuisine" required placeholder="Fruits de mer, Gastronomie..." className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
+              <input type="text" name="type_cuisine" required placeholder="Fruits de mer, Gastronomie..." className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold" />
             </div>
             <div>
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Gamme de prix *</label>
-              <select name="gamme_prix" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold">
+              <select name="gamme_prix" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold">
                 <option value="€">€ — Économique</option>
                 <option value="€€">€€ — Intermédiaire</option>
                 <option value="€€€">€€€ — Gastronomique</option>
@@ -57,27 +57,27 @@ export default async function RestaurantsAdminPage() {
             </div>
             <div>
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Ville *</label>
-              <input type="text" name="ville" required placeholder="Berck-sur-Mer" className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
+              <input type="text" name="ville" required placeholder="Berck-sur-Mer" className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold" />
             </div>
             <div className="sm:col-span-2">
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Adresse *</label>
-              <input type="text" name="adresse" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
+              <input type="text" name="adresse" required className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold" />
             </div>
             <div>
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Téléphone</label>
-              <input type="tel" name="telephone" className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
+              <input type="tel" name="telephone" className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold" />
             </div>
             <div>
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Lien Google Maps</label>
-              <input type="url" name="google_maps_url" placeholder="https://maps.google.com/..." className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
+              <input type="url" name="google_maps_url" placeholder="https://maps.google.com/..." className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold" />
             </div>
             <div className="sm:col-span-2">
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Description *</label>
-              <textarea name="description" required rows={3} className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold resize-none" />
+              <textarea name="description" required rows={3} className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold resize-none" />
             </div>
             <div>
               <label className="block font-lato text-xs font-semibold text-gray-600 mb-1.5">Spécialité</label>
-              <input type="text" name="specialite" placeholder="Plat signature..." className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold" />
+              <input type="text" name="specialite" placeholder="Plat signature..." className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold" />
             </div>
           </div>
           <button type="submit" className="bg-primary text-white font-lato text-sm font-semibold px-6 py-2.5 rounded-xl hover:bg-secondary transition-colors">

@@ -86,7 +86,7 @@ export default function LogementEditForm({ logement }: Props) {
               type="text"
               value={infos.nom}
               onChange={(e) => setInfos((f) => ({ ...f, nom: e.target.value }))}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold"
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold"
             />
           </div>
           <div className="sm:col-span-2">
@@ -95,7 +95,7 @@ export default function LogementEditForm({ logement }: Props) {
               type="text"
               value={infos.description_courte}
               onChange={(e) => setInfos((f) => ({ ...f, description_courte: e.target.value }))}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold"
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold"
             />
           </div>
           <div className="sm:col-span-2">
@@ -104,7 +104,7 @@ export default function LogementEditForm({ logement }: Props) {
               rows={6}
               value={infos.description}
               onChange={(e) => setInfos((f) => ({ ...f, description: e.target.value }))}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold resize-none"
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold resize-none"
             />
           </div>
           <div>
@@ -113,7 +113,7 @@ export default function LogementEditForm({ logement }: Props) {
               type="number" min={1} max={20}
               value={infos.capacite}
               onChange={(e) => setInfos((f) => ({ ...f, capacite: Number(e.target.value) }))}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold"
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold"
             />
           </div>
           <div>
@@ -122,7 +122,7 @@ export default function LogementEditForm({ logement }: Props) {
               type="number" min={1} max={10}
               value={infos.nb_chambres}
               onChange={(e) => setInfos((f) => ({ ...f, nb_chambres: Number(e.target.value) }))}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold"
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold"
             />
           </div>
           <div>
@@ -131,7 +131,7 @@ export default function LogementEditForm({ logement }: Props) {
               type="number" min={1} max={10}
               value={infos.nb_salles_de_bain}
               onChange={(e) => setInfos((f) => ({ ...f, nb_salles_de_bain: Number(e.target.value) }))}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold"
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold"
             />
           </div>
           <div>
@@ -140,7 +140,7 @@ export default function LogementEditForm({ logement }: Props) {
               type="number" min={0} step={0.01}
               value={infos.prix_par_nuit}
               onChange={(e) => setInfos((f) => ({ ...f, prix_par_nuit: Number(e.target.value) }))}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold"
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold"
             />
           </div>
         </div>
@@ -189,7 +189,7 @@ export default function LogementEditForm({ logement }: Props) {
             onChange={(e) => setNewEquip(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addEquip())}
             placeholder="WiFi haut débit, Parking, Terrasse..."
-            className="flex-1 border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:border-gold"
+            className="flex-1 border border-gray-200 rounded-xl px-3 py-2.5 font-lato text-base focus:outline-none focus:ring-1 focus:ring-gold/50 focus:border-gold"
           />
           <button
             type="button"

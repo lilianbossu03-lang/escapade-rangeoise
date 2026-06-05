@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import {
   LayoutDashboard,
   Home,
@@ -14,6 +15,7 @@ import {
   X,
 } from "lucide-react";
 import Image from "next/image";
+import FocusTrap from "focus-trap-react";
 import { useSidebar } from "./AdminSidebarContext";
 
 const navItems = [
@@ -86,6 +88,15 @@ function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
 export default function AdminSidebar() {
   const { isOpen, close } = useSidebar();
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [isOpen, close]);
+
   return (
     <>
       {/* ── Desktop sidebar (lg+) ─────────────────────────────────────── */}
@@ -103,23 +114,27 @@ export default function AdminSidebar() {
       )}
 
       {/* ── Mobile drawer ─────────────────────────────────────────────── */}
-      <aside
-        className={`lg:hidden fixed top-0 left-0 h-screen w-[280px] max-w-[80vw] bg-primary text-white flex flex-col z-50 shadow-2xl transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-        aria-label="Menu de navigation"
-      >
-        {/* Close button */}
-        <button
-          onClick={close}
-          className="absolute top-4 right-4 text-white/60 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
-          aria-label="Fermer le menu"
+      <FocusTrap active={isOpen} focusTrapOptions={{ initialFocus: false, allowOutsideClick: true }}>
+        <aside
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu de navigation administration"
+          className={`lg:hidden fixed top-0 left-0 h-screen w-[280px] max-w-[80vw] bg-primary text-white flex flex-col z-50 shadow-2xl transition-transform duration-300 ease-in-out ${
+            isOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
         >
-          <X className="w-5 h-5" />
-        </button>
+          {/* Close button */}
+          <button
+            onClick={close}
+            className="absolute top-4 right-4 text-white/60 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+            aria-label="Fermer le menu"
+          >
+            <X className="w-5 h-5" />
+          </button>
 
-        <SidebarContent onLinkClick={close} />
-      </aside>
+          <SidebarContent onLinkClick={close} />
+        </aside>
+      </FocusTrap>
     </>
   );
 }

@@ -50,13 +50,14 @@ export default function LoginPage() {
           <form action={formAction} className="space-y-4">
             {/* Email */}
             <div>
-              <label className="block font-lato text-sm font-semibold text-gray-700 mb-1.5">
+              <label htmlFor="email" className="block font-lato text-sm font-semibold text-gray-700 mb-1.5">
                 Adresse email
               </label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="email"
+                  id="email"
                   name="email"
                   required
                   placeholder="admin@escapade.fr"
@@ -68,13 +69,14 @@ export default function LoginPage() {
 
             {/* Password */}
             <div>
-              <label className="block font-lato text-sm font-semibold text-gray-700 mb-1.5">
+              <label htmlFor="password" className="block font-lato text-sm font-semibold text-gray-700 mb-1.5">
                 Mot de passe
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type={showPassword ? "text" : "password"}
+                  id="password"
                   name="password"
                   required
                   placeholder="••••••••"
