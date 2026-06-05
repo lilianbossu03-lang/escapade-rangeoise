@@ -1,4 +1,6 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
+import { siteConfig } from "@/lib/seo-config";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import LogementsCarrousel from "@/components/LogementsCarrousel";
@@ -14,6 +16,22 @@ import { ContenuSite } from "@/types";
 import type { PeriodeTarifaire } from "@/types";
 
 export const revalidate = 60; // revalidation toutes les 60s
+
+export const metadata: Metadata = {
+  title: "L'Escapade Rangeoise — Locations de vacances sur la Côte d'Opale",
+  description: siteConfig.description,
+  alternates: { canonical: siteConfig.url },
+  openGraph: {
+    type: "website",
+    url: siteConfig.url,
+    title: "L'Escapade Rangeoise — Locations de vacances sur la Côte d'Opale",
+    description: siteConfig.description,
+  },
+  twitter: {
+    title: "L'Escapade Rangeoise — Locations sur la Côte d'Opale",
+    description: siteConfig.description,
+  },
+};
 
 async function fetchData() {
   const supabase = createClient();

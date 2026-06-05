@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Lato } from "next/font/google";
+import { siteConfig } from "@/lib/seo-config";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -23,28 +24,23 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.name,
+    template: `%s — ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
   icons: {
     icon: "/favicon.svg",
   },
-  title: "L'Escapade Rangeoise — Locations de vacances sur la Côte d'Opale",
-  description:
-    "Découvrez nos locations de vacances à Rang-du-Fliers, près de Berck-sur-Mer sur la magnifique Côte d'Opale (Pas-de-Calais). Mer, dunes, et authenticité.",
-  keywords: [
-    "location vacances",
-    "Côte d'Opale",
-    "Berck-sur-Mer",
-    "Rang-du-Fliers",
-    "Pas-de-Calais",
-    "gîte",
-    "mer",
-    "plage",
-  ],
   openGraph: {
-    title: "L'Escapade Rangeoise — Locations de vacances sur la Côte d'Opale",
-    description:
-      "Locations de vacances authentiques à Rang-du-Fliers, proche de Berck-sur-Mer.",
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
     type: "website",
-    locale: "fr_FR",
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 

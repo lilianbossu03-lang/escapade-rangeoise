@@ -4,7 +4,7 @@ import { SidebarProvider } from "./_components/AdminSidebarContext";
 
 export const metadata = {
   title: "Administration — L'Escapade Rangeoise",
-  robots: "noindex, nofollow",
+  robots: { index: false, follow: false },
 };
 
 export default function AdminLayout({
