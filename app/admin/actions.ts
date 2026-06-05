@@ -4,9 +4,13 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 import { sendNewReservationEmails, sendConfirmationEmail, sendRefusEmail } from "@/lib/emails/send";
 import { reservationSchema } from "@/lib/schemas/reservation";
 import { checkPeriodeOverlap } from "@/lib/validations/periodes-tarifaires";
+import { requireAdmin } from "@/lib/auth";
+import { checkReservationLimit, checkLoginLimit, getClientIp } from "@/lib/rate-limit";
+import { logError } from "@/lib/logging";
 
 export type LoginState = { error: string | null };
 
@@ -16,6 +20,13 @@ export async function login(
   _prevState: LoginState,
   formData: FormData
 ): Promise<LoginState> {
+  const ip = getClientIp(await headers());
+  const rl = await checkLoginLimit(ip);
+  if (rl.blocked) {
+    const m = rl.retryInMinutes;
+    return { error: `Trop de tentatives. Réessayez dans ${m} minute${m > 1 ? "s" : ""}.` };
+  }
+
   const email = (formData.get("email") as string | null)?.trim() ?? "";
   const password = (formData.get("password") as string | null) ?? "";
 
@@ -38,6 +49,7 @@ export async function logout() {
 // ── Réservations ──────────────────────────────────────────────────────────────
 
 export async function updateReservationStatut(id: string, statut: "confirme" | "refuse" | "annule") {
+  await requireAdmin();
   const supabase = createAdminClient();
 
   // Fetch reservation + logement details before updating
@@ -102,7 +114,7 @@ export async function updateReservationStatut(id: string, statut: "confirme" | "
       nb_adultes: res.nb_adultes,
       nb_enfants: res.nb_enfants,
       prix_par_nuit: res.logements?.prix_par_nuit,
-    }).catch(() => {});
+    }).catch((err) => logError("sendConfirmationEmail", err, { reservationId: id }));
   } else if (statut === "refuse" || statut === "annule") {
     await sendRefusEmail({
       nom_client: res.nom_client,
@@ -110,13 +122,14 @@ export async function updateReservationStatut(id: string, statut: "confirme" | "
       logement_nom: res.logement_nom,
       date_arrivee: res.date_arrivee,
       date_depart: res.date_depart,
-    }).catch(() => {});
+    }).catch((err) => logError("sendRefusEmail", err, { reservationId: id }));
   }
 }
 
 // ── Logements ─────────────────────────────────────────────────────────────────
 
 export async function updateLogementDisponible(id: string, disponible: boolean) {
+  await requireAdmin();
   const supabase = createAdminClient();
   await supabase.from("logements").update({ disponible }).eq("id", id);
   revalidatePath("/admin/logements");
@@ -135,6 +148,7 @@ export async function updateLogement(id: string, data: {
   photos?: string[];
   photo_principale?: string;
 }) {
+  await requireAdmin();
   const supabase = createAdminClient();
   await supabase.from("logements").update(data).eq("id", id);
   revalidatePath("/admin/logements");
@@ -155,6 +169,7 @@ export async function createPeriodeTarifaire(data: {
   date_fin: string;
   prix_par_nuit: number;
 }): Promise<PeriodeResult> {
+  await requireAdmin();
   if (!data.logement_id || !data.date_debut || !data.date_fin || !data.nom.trim() || data.prix_par_nuit < 0) {
     return { success: false, error: "Données invalides." };
   }
@@ -195,6 +210,7 @@ export async function updatePeriodeTarifaire(id: string, data: {
   date_fin?: string;
   prix_par_nuit?: number;
 }): Promise<PeriodeResult> {
+  await requireAdmin();
   const supabase = createAdminClient();
 
   if (data.date_debut !== undefined || data.date_fin !== undefined) {
@@ -243,6 +259,7 @@ export async function updatePeriodeTarifaire(id: string, data: {
 }
 
 export async function deletePeriodeTarifaire(id: string) {
+  await requireAdmin();
   const supabase = createAdminClient();
   await supabase.from("periodes_tarifaires").delete().eq("id", id);
   revalidatePath("/admin/tarifs");
@@ -257,12 +274,14 @@ export async function createDateBloquee(data: {
   date_fin: string;
   motif?: string;
 }) {
+  await requireAdmin();
   const supabase = createAdminClient();
   await supabase.from("dates_bloquees").insert(data);
   revalidatePath("/admin/disponibilites");
 }
 
 export async function deleteDateBloquee(id: string) {
+  await requireAdmin();
   const supabase = createAdminClient();
   await supabase.from("dates_bloquees").delete().eq("id", id);
   revalidatePath("/admin/disponibilites");
@@ -279,12 +298,14 @@ export async function createEvenement(data: {
   categorie: string;
   url?: string;
 }) {
+  await requireAdmin();
   const supabase = createAdminClient();
   await supabase.from("evenements").insert(data);
   revalidatePath("/admin/evenements");
 }
 
 export async function deleteEvenement(id: string) {
+  await requireAdmin();
   const supabase = createAdminClient();
   await supabase.from("evenements").delete().eq("id", id);
   revalidatePath("/admin/evenements");
@@ -304,12 +325,14 @@ export async function createRestaurant(data: {
   description: string;
   specialite?: string;
 }) {
+  await requireAdmin();
   const supabase = createAdminClient();
   await supabase.from("restaurants").insert(data);
   revalidatePath("/admin/restaurants");
 }
 
 export async function deleteRestaurant(id: string) {
+  await requireAdmin();
   const supabase = createAdminClient();
   await supabase.from("restaurants").delete().eq("id", id);
   revalidatePath("/admin/restaurants");
@@ -322,6 +345,17 @@ export type SubmitReservationResult =
   | { success: false; errors?: Record<string, string>; globalError?: string };
 
 export async function submitReservation(data: unknown): Promise<SubmitReservationResult> {
+  // 0. Rate limiting
+  const ip = getClientIp(await headers());
+  const rl = await checkReservationLimit(ip);
+  if (rl.blocked) {
+    const m = rl.retryInMinutes;
+    return {
+      success: false,
+      globalError: `Trop de demandes envoyées. Réessayez dans ${m} minute${m > 1 ? "s" : ""}.`,
+    };
+  }
+
   // 1. Schema validation
   const parsed = reservationSchema.safeParse(data);
   if (!parsed.success) {
@@ -390,7 +424,7 @@ export async function submitReservation(data: unknown): Promise<SubmitReservatio
   await sendNewReservationEmails({
     ...validData,
     prix_par_nuit: logement.prix_par_nuit,
-  }).catch(() => {});
+  }).catch((err) => logError("sendNewReservationEmails", err));
 
   return { success: true };
 }
