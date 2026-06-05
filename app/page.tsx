@@ -14,6 +14,12 @@ import FloatingReserveButton from "@/components/FloatingReserveButton";
 import { createClient } from "@/lib/supabase/server";
 import { ContenuSite } from "@/types";
 import type { PeriodeTarifaire } from "@/types";
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  getLodgingBusinessSchema,
+  getEventsSchema,
+  getRestaurantsSchema,
+} from "@/lib/schemas/json-ld";
 
 export const revalidate = 60; // revalidation toutes les 60s
 
@@ -142,8 +148,19 @@ async function fetchData() {
 export default async function Home() {
   const { logements, region_points, evenements, restaurants, contenu, dates_bloquees, periodes_tarifaires } = await fetchData();
 
+  const lodgingSchema = getLodgingBusinessSchema({
+    email: contenu.contact_email,
+    telephone: contenu.contact_telephone,
+    airbnbUrl: contenu.airbnb_url,
+  });
+  const eventsSchemas = getEventsSchema(evenements);
+  const restaurantsSchemas = getRestaurantsSchema(restaurants);
+
   return (
     <main>
+      <JsonLd schema={lodgingSchema} />
+      {eventsSchemas.length > 0 && <JsonLd schema={eventsSchemas} />}
+      {restaurantsSchemas.length > 0 && <JsonLd schema={restaurantsSchemas} />}
       <Navbar />
       <Hero />
       <LogementsCarrousel logements={logements} />

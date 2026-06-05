@@ -5,6 +5,8 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { PeriodeTarifaire } from "@/types";
 import { siteConfig } from "@/lib/seo-config";
+import JsonLd from "@/components/seo/JsonLd";
+import { getVacationRentalSchema, getBreadcrumbSchema } from "@/lib/schemas/json-ld";
 
 interface Props {
   params: { slug: string };
@@ -80,11 +82,22 @@ export default async function LogementPage({ params }: Props) {
     prix_par_nuit: Number(p.prix_par_nuit),
   }));
 
+  const vacationRentalSchema = getVacationRentalSchema(logement);
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Accueil", url: siteConfig.url },
+    { name: "Logements", url: `${siteConfig.url}/#logements` },
+    { name: logement.nom, url: `${siteConfig.url}/logements/${logement.slug}` },
+  ]);
+
   return (
-    <LogementDetail
-      logement={logement}
-      dates_bloquees={datesBloquees}
-      periodes_tarifaires={periodesTarifaires}
-    />
+    <>
+      <JsonLd schema={vacationRentalSchema} />
+      <JsonLd schema={breadcrumbSchema} />
+      <LogementDetail
+        logement={logement}
+        dates_bloquees={datesBloquees}
+        periodes_tarifaires={periodesTarifaires}
+      />
+    </>
   );
 }

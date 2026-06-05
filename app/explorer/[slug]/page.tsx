@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { siteConfig } from "@/lib/seo-config";
+import JsonLd from "@/components/seo/JsonLd";
+import { getTouristAttractionSchema, getBreadcrumbSchema } from "@/lib/schemas/json-ld";
 
 interface Props {
   params: { slug: string };
@@ -76,8 +78,23 @@ export default async function ExplorerSlugPage({ params }: Props) {
     },
   };
 
+  const touristAttractionSchema = getTouristAttractionSchema({
+    nom: point.nom,
+    slug: point.slug,
+    description: point.description,
+    image: point.image_hero ?? point.image,
+    distance: point.distance,
+  });
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Accueil", url: siteConfig.url },
+    { name: "À explorer", url: `${siteConfig.url}/#region` },
+    { name: point.nom, url: `${siteConfig.url}/explorer/${point.slug}` },
+  ]);
+
   return (
     <>
+      <JsonLd schema={touristAttractionSchema} />
+      <JsonLd schema={breadcrumbSchema} />
       <Navbar />
       <main className="bg-white min-h-screen">
         {/* ── Hero ─────────────────────────────────────────────────────── */}
