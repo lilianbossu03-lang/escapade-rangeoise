@@ -20,10 +20,17 @@ export default async function OgImage({ params }: Props) {
 
   const nom = data?.nom ?? "Logement";
   const description = data?.description_courte ?? siteConfig.description;
-  const photo = data?.photos?.[0] ?? null;
   const ville = data?.ville ?? "Rang-du-Fliers";
   const capacite = data?.capacite ?? null;
   const chambres = data?.chambres ?? null;
+
+  // Edge runtime cannot resolve relative paths — convert to absolute URL
+  const rawPhoto = data?.photos?.[0] ?? null;
+  const photo = rawPhoto
+    ? rawPhoto.startsWith("http")
+      ? rawPhoto
+      : `${siteConfig.url}${rawPhoto}`
+    : null;
 
   return new ImageResponse(
     (
