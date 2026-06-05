@@ -1,8 +1,31 @@
 import { siteConfig } from "@/lib/seo-config";
+import type { Evenement } from "@/types";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 const base = siteConfig.url;
+
+// Postal code lookup for Côte d'Opale cities
+const villesCoteOpale: Record<string, string> = {
+  "berck-sur-mer": "62600",
+  "berck": "62600",
+  "le touquet": "62520",
+  "le touquet-paris-plage": "62520",
+  "rang-du-fliers": "62180",
+  "montreuil-sur-mer": "62170",
+  "boulogne-sur-mer": "62200",
+  "calais": "62100",
+  "etaples": "62630",
+  "etaples-sur-mer": "62630",
+  "saint-josse": "62170",
+  "fort-mahon": "80120",
+  "crotoy": "80550",
+  "le crotoy": "80550",
+};
+
+function getCodePostal(lieu: string): string {
+  return villesCoteOpale[lieu.toLowerCase().trim()] ?? siteConfig.adresse.postalCode;
+}
 
 // ─── LodgingBusiness (home page) ────────────────────────────────────────────
 
@@ -90,15 +113,14 @@ export function getVacationRentalSchema(logement: {
 // ─── Events ─────────────────────────────────────────────────────────────────
 
 /**
- * Convert a bare date ("2026-07-15") to a full ISO 8601 datetime string with
- * France timezone offset (CEST +02:00 Apr–Oct, CET +01:00 Nov–Mar).
- * If the date already contains a time component it is left as-is (tz appended).
+ * Convert a bare date ("2026-07-15") to ISO 8601 with France timezone.
+ * CEST +02:00 (Apr–Oct), CET +01:00 (Nov–Mar).
+ * If the string already contains "T", strips the existing offset and re-applies.
  */
 function toFranceIso(dateStr: string, defaultHour = 10): string {
   const month = parseInt(dateStr.slice(5, 7), 10);
   const tz = month >= 4 && month <= 10 ? "+02:00" : "+01:00";
   if (dateStr.includes("T")) {
-    // Already has time — strip any existing offset and re-apply
     const bare = dateStr.split("+")[0].replace("Z", "");
     return `${bare}${tz}`;
   }
@@ -106,55 +128,49 @@ function toFranceIso(dateStr: string, defaultHour = 10): string {
   return `${dateStr}T${hh}:00:00${tz}`;
 }
 
-export function getEventsSchema(
-  evenements: Array<{
-    nom: string;
-    description?: string;
-    date: string;
-    lieu?: string;
-    image?: string;
-  }>
-) {
-  return evenements.slice(0, 10).map((ev) => {
-    const startDate = toFranceIso(ev.date, 10);
-    const endDate = toFranceIso(ev.date, 14); // +4 h default
+/** Single event schema — no @context (used inside @graph). */
+export function getEventSchema(ev: Evenement): Record<string, unknown> {
+  const startDate = toFranceIso(ev.date, 10);
+  // Use date_fin when available; otherwise +4 h (same day, 14:00)
+  const endDate = ev.date_fin
+    ? toFranceIso(ev.date_fin, 10)
+    : toFranceIso(ev.date, 14);
 
-    // Map free-text lieu to addressLocality; fall back to siteConfig
-    const addressLocality = ev.lieu ?? siteConfig.adresse.locality;
-    // Best-effort postalCode: only fill if lieu matches our known locality
-    const postalCode =
-      !ev.lieu || ev.lieu === siteConfig.adresse.locality
-        ? siteConfig.adresse.postalCode
-        : undefined;
+  return {
+    "@type": "Event",
+    name: ev.titre,
+    startDate,
+    endDate,
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    description: ev.description || `${ev.titre} — Événement sur la Côte d'Opale`,
+    // Always include an image; fall back to the global OG image
+    image: `${base}/opengraph-image`,
+    location: {
+      "@type": "Place",
+      name: ev.lieu,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: ev.lieu,
+        addressRegion: siteConfig.adresse.region,
+        postalCode: getCodePostal(ev.lieu),
+        addressCountry: siteConfig.adresse.country,
+      },
+    },
+    organizer: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: base,
+    },
+  };
+}
 
-    return {
-      "@context": "https://schema.org",
-      "@type": "Event",
-      name: ev.nom,
-      description: ev.description ?? `${ev.nom} — événement sur la Côte d'Opale`,
-      startDate,
-      endDate,
-      eventStatus: "https://schema.org/EventScheduled",
-      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-      location: {
-        "@type": "Place",
-        name: ev.lieu ?? "Côte d'Opale",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality,
-          addressRegion: siteConfig.adresse.region,
-          ...(postalCode ? { postalCode } : {}),
-          addressCountry: siteConfig.adresse.country,
-        },
-      },
-      ...(ev.image ? { image: ev.image } : {}),
-      organizer: {
-        "@type": "Organization",
-        name: siteConfig.name,
-        url: base,
-      },
-    };
-  });
+/** All events as a single @graph — valid JSON-LD, one <script> tag. */
+export function getEventsSchema(evenements: Evenement[]) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": evenements.slice(0, 10).map(getEventSchema),
+  };
 }
 
 // ─── Restaurants ─────────────────────────────────────────────────────────────

@@ -154,13 +154,13 @@ export default async function Home() {
     telephone: contenu.contact_telephone,
     airbnbUrl: contenu.airbnb_url,
   });
-  const eventsSchemas = getEventsSchema(evenements);
+  const eventsSchema = getEventsSchema(evenements);
   const restaurantsSchemas = getRestaurantsSchema(restaurants);
 
   return (
     <main>
       <JsonLd schema={lodgingSchema} />
-      {eventsSchemas.length > 0 && <JsonLd schema={eventsSchemas} />}
+      {evenements.length > 0 && <JsonLd schema={eventsSchema} />}
       {restaurantsSchemas.length > 0 && <JsonLd schema={restaurantsSchemas} />}
       <Navbar />
       <Hero />
