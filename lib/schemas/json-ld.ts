@@ -34,11 +34,60 @@ export function getLodgingBusinessSchema(opts: {
   telephone?: string;
   airbnbUrl?: string;
 }) {
+  const sameAs = [opts.airbnbUrl].filter(Boolean) as string[];
+
   return {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     name: siteConfig.name,
     url: base,
+    description: siteConfig.description,
+    logo: `${base}/logo.svg`,
+    image: `${base}/opengraph-image`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: siteConfig.adresse.locality,
+      addressRegion: siteConfig.adresse.region,
+      postalCode: siteConfig.adresse.postalCode,
+      addressCountry: siteConfig.adresse.country,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      // Rang-du-Fliers, centre-ville
+      latitude: 50.4081,
+      longitude: 1.6314,
+    },
+    priceRange: "€€",
+    currenciesAccepted: "EUR",
+    paymentAccepted: "Espèces, Virement bancaire",
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        opens: "09:00",
+        closes: "20:00",
+      },
+    ],
+    ...(opts.email ? { email: opts.email } : {}),
+    ...(opts.telephone ? { telephone: opts.telephone } : {}),
+    ...(sameAs.length > 0 ? { sameAs } : {}),
+  };
+}
+
+export function getOrganizationSchema(opts: {
+  email?: string;
+  telephone?: string;
+  airbnbUrl?: string;
+}) {
+  const sameAs = [opts.airbnbUrl].filter(Boolean) as string[];
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteConfig.name,
+    url: base,
+    logo: `${base}/logo.svg`,
+    image: `${base}/opengraph-image`,
     description: siteConfig.description,
     address: {
       "@type": "PostalAddress",
@@ -47,27 +96,18 @@ export function getLodgingBusinessSchema(opts: {
       postalCode: siteConfig.adresse.postalCode,
       addressCountry: siteConfig.adresse.country,
     },
-    ...(opts.email ? { email: opts.email } : {}),
-    ...(opts.telephone ? { telephone: opts.telephone } : {}),
-    ...(opts.airbnbUrl
-      ? { sameAs: [opts.airbnbUrl] }
+    ...(opts.email || opts.telephone
+      ? {
+          contactPoint: {
+            "@type": "ContactPoint",
+            ...(opts.telephone ? { telephone: opts.telephone } : {}),
+            ...(opts.email ? { email: opts.email } : {}),
+            contactType: "customer service",
+            availableLanguage: ["French"],
+          },
+        }
       : {}),
-    geo: {
-      "@type": "GeoCoordinates",
-      // Rang-du-Fliers approximate coordinates
-      latitude: 50.4186,
-      longitude: 1.6089,
-    },
-    areaServed: {
-      "@type": "GeoCircle",
-      geoMidpoint: {
-        "@type": "GeoCoordinates",
-        latitude: 50.4186,
-        longitude: 1.6089,
-      },
-      geoRadius: "50000",
-    },
-    containsPlace: { "@type": "Place", name: "Côte d'Opale" },
+    ...(sameAs.length > 0 ? { sameAs } : {}),
   };
 }
 
