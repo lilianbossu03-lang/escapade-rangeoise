@@ -10,7 +10,7 @@ function getSiteUrl(): string {
     return env.replace(/\/$/, "");
   }
   // TODO: remplacer par le futur nom de domaine (ex: https://escapade-rangeoise.fr)
-  return "https://escapade-rangeoise.vercel.app";
+  return "https://escapaderangeoise.vercel.app";
 }
 
 export const siteConfig = {

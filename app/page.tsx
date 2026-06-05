@@ -34,6 +34,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
   },
   twitter: {
+    card: "summary_large_image",
     title: "L'Escapade Rangeoise — Locations sur la Côte d'Opale",
     description: siteConfig.description,
   },
