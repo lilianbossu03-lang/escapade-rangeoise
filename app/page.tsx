@@ -44,23 +44,39 @@ export const metadata: Metadata = {
 async function fetchData() {
   const supabase = createClient();
 
-  const [
-    { data: logements },
-    { data: region_points },
-    { data: evenements },
-    { data: restaurants },
-    { data: contenu_rows },
-    { data: dates_bloquees },
-    { data: periodes_raw },
-  ] = await Promise.all([
-    supabase.from("logements").select("*").eq("disponible", true).order("ordre"),
-    supabase.from("lieux_explorer").select("*").order("ordre"),
-    supabase.from("evenements").select("*").order("date"),
-    supabase.from("restaurants").select("*"),
-    supabase.from("contenu_site").select("cle, valeur"),
-    supabase.from("dates_bloquees").select("*"),
-    supabase.from("periodes_tarifaires").select("*"),
-  ]);
+  let logements, region_points, evenements, restaurants, contenu_rows, dates_bloquees, periodes_raw;
+  try {
+    const results = await Promise.all([
+      supabase.from("logements").select("*").eq("disponible", true).order("ordre"),
+      supabase.from("lieux_explorer").select("*").order("ordre"),
+      supabase.from("evenements").select("*").order("date"),
+      supabase.from("restaurants").select("*"),
+      supabase.from("contenu_site").select("cle, valeur"),
+      supabase.from("dates_bloquees").select("*"),
+      supabase.from("periodes_tarifaires").select("*"),
+    ]);
+    [
+      { data: logements },
+      { data: region_points },
+      { data: evenements },
+      { data: restaurants },
+      { data: contenu_rows },
+      { data: dates_bloquees },
+      { data: periodes_raw },
+    ] = results;
+  } catch (err) {
+    console.error("[fetchData] Supabase unreachable:", err);
+    // Return empty state — page renders gracefully instead of 500
+    return {
+      logements: [],
+      region_points: [],
+      evenements: [],
+      restaurants: [],
+      contenu: { hero_titre: "", hero_sous_titre: "", hero_image: "", qui_suis_je_titre: "", qui_suis_je_texte: "", qui_suis_je_photo: "", region_titre: "", region_description: "", contact_email: "", contact_telephone: "", airbnb_url: "" } as ContenuSite,
+      dates_bloquees: [],
+      periodes_tarifaires: [],
+    };
+  }
 
   // Contenu site : rows → objet clé/valeur
   const contenu: ContenuSite = {

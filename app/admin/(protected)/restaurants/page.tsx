@@ -1,6 +1,7 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createRestaurant, deleteRestaurant } from "@/app/admin/actions";
 import { UtensilsCrossed, Trash2, Plus, MapPin } from "lucide-react";
+import Image from "next/image";
 
 export default async function RestaurantsAdminPage() {
   const supabase = createAdminClient();
@@ -99,8 +100,7 @@ export default async function RestaurantsAdminPage() {
               <div key={r.id} className="px-6 py-4 flex items-start justify-between gap-4">
                 <div className="flex gap-4 min-w-0">
                   {r.photo && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={r.photo} alt={r.nom} className="w-14 h-14 rounded-xl object-cover flex-shrink-0" />
+                    <Image src={r.photo} alt={r.nom} width={56} height={56} className="rounded-xl object-cover flex-shrink-0" />
                   )}
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 flex-wrap mb-0.5">

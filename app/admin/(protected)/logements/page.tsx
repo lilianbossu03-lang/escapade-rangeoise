@@ -2,6 +2,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { updateLogementDisponible } from "@/app/admin/actions";
 import { Home, BedDouble, Users, Euro, Pencil } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function LogementsAdminPage() {
   const supabase = createAdminClient();
@@ -19,8 +20,7 @@ export default async function LogementsAdminPage() {
           <div key={l.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             {/* Photo */}
             <div className="relative h-44 overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={l.photo_principale} alt={l.nom} className="w-full h-full object-cover" />
+              <Image src={l.photo_principale || "/hero.jpg"} alt={l.nom} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
               <span className={`absolute top-3 right-3 font-lato text-xs font-bold px-2.5 py-1 rounded-full ${l.disponible ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
                 {l.disponible ? "Actif" : "Inactif"}
