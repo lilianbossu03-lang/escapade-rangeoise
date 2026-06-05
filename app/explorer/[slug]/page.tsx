@@ -1,11 +1,12 @@
 import { notFound } from "next/navigation";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft, Clock, Car, Euro, CalendarDays, CheckCircle2, MapPin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { siteConfig } from "@/lib/seo-config";
 
 interface Props {
   params: { slug: string };
@@ -25,9 +26,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .eq("slug", params.slug)
     .single();
   if (!data) return {};
+
+  const url = `${siteConfig.url}/explorer/${params.slug}`;
+  const title = `${data.nom} — L'Escapade Rangeoise`;
+
   return {
-    title: `${data.nom} — L'Escapade Rangeoise`,
+    title,
     description: data.description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "website",
+      url,
+      title,
+      description: data.description,
+    },
+    twitter: {
+      title,
+      description: data.description,
+    },
   };
 }
 

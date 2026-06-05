@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import LogementDetail from "./LogementDetail";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { PeriodeTarifaire } from "@/types";
+import { siteConfig } from "@/lib/seo-config";
 
 interface Props {
   params: { slug: string };
@@ -14,7 +16,7 @@ export async function generateStaticParams() {
   return (data ?? []).map((l) => ({ slug: l.slug }));
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const supabase = createAdminClient();
   const { data } = await supabase
     .from("logements")
@@ -23,9 +25,24 @@ export async function generateMetadata({ params }: Props) {
     .single();
 
   if (!data) return {};
+
+  const url = `${siteConfig.url}/logements/${params.slug}`;
+  const title = `${data.nom} — L'Escapade Rangeoise`;
+
   return {
-    title: `${data.nom} — L'Escapade Rangeoise`,
+    title,
     description: data.description_courte,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "website",
+      url,
+      title,
+      description: data.description_courte,
+    },
+    twitter: {
+      title,
+      description: data.description_courte,
+    },
   };
 }
 
