@@ -22,7 +22,7 @@ export default function PolitiqueConfidentialitePage() {
             className="inline-flex items-center gap-1.5 font-lato text-sm text-gray-400 hover:text-primary transition-colors mb-8"
           >
             <ChevronLeft className="w-4 h-4" />
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Link>
 
           {/* Header */}
@@ -32,7 +32,7 @@ export default function PolitiqueConfidentialitePage() {
             </div>
             <div>
               <p className="font-lato text-xs text-gray-400 uppercase tracking-widest">
-                L'Escapade Rangeoise
+                L&apos;Escapade Rangeoise
               </p>
               <h1 className="font-playfair text-3xl text-primary">
                 Politique de confidentialité
@@ -43,20 +43,20 @@ export default function PolitiqueConfidentialitePage() {
           <div className="space-y-8">
             <p className="font-lato text-gray-600 leading-relaxed">
               La présente politique de confidentialité a pour objet de vous informer avec la plus grande
-              transparence sur la manière dont L'Escapade Rangeoise collecte, utilise et protège vos
-              données personnelles. Cet engagement de confidentialité s'inscrit dans le strict respect de
+              transparence sur la manière dont L&apos;Escapade Rangeoise collecte, utilise et protège vos
+              données personnelles. Cet engagement de confidentialité s&apos;inscrit dans le strict respect de
               la législation européenne, notamment le Règlement Général sur la Protection des Données
               (RGPD), ainsi que de la loi française Informatique et Libertés. Nous accordons une
               importance primordiale à la protection de votre vie privée et à la sécurité des
               informations que vous nous confiez lors de la préparation de vos vacances sur la Côte
-              d'Opale.
+              d&apos;Opale.
             </p>
 
             <Section title="1. Responsable du traitement et données collectées">
               <p>
                 Le responsable du traitement de vos informations est <strong>Sandra Bossu</strong>,
-                éditrice et propriétaire du site de L'Escapade Rangeoise, que vous pouvez joindre
-                facilement pour toute question à l'adresse électronique{" "}
+                éditrice et propriétaire du site de L&apos;Escapade Rangeoise, que vous pouvez joindre
+                facilement pour toute question à l&apos;adresse électronique{" "}
                 <a
                   href="mailto:contact@escapade-rangeoise.fr"
                   className="text-gold hover:underline"
@@ -68,14 +68,14 @@ export default function PolitiqueConfidentialitePage() {
               <p>
                 Dans le cadre de votre visite sur notre site internet, nous collectons uniquement les
                 données que vous choisissez de nous transmettre de manière volontaire, principalement
-                lors de l'utilisation de notre formulaire de contact ou de réservation. Ces informations
+                lors de l&apos;utilisation de notre formulaire de contact ou de réservation. Ces informations
                 englobent votre nom, votre prénom, votre adresse e-mail, votre numéro de téléphone
                 éventuel, ainsi que les détails inhérents à votre projet de séjour, tels que les dates
                 souhaitées, le nombre de voyageurs et le contenu de vos messages.
               </p>
               <p>
-                Il est essentiel de préciser qu'<strong>aucune donnée bancaire ou financière</strong>{" "}
-                n'est collectée ni stockée directement sur notre plateforme, les transactions éventuelles
+                Il est essentiel de préciser qu&apos;<strong>aucune donnée bancaire ou financière</strong>{" "}
+                n&apos;est collectée ni stockée directement sur notre plateforme, les transactions éventuelles
                 étant systématiquement déléguées à des plateformes de paiement tierces et hautement
                 sécurisées.
               </p>
@@ -86,11 +86,11 @@ export default function PolitiqueConfidentialitePage() {
                 Les données personnelles que nous recueillons sont traitées de manière loyale et sont
                 utilisées exclusivement pour vous fournir le meilleur service possible. Elles nous sont
                 indispensables pour répondre avec précision à vos demandes de renseignements, pour gérer
-                l'ensemble de votre dossier de réservation, assurer le suivi de votre séjour et pouvoir
+                l&apos;ensemble de votre dossier de réservation, assurer le suivi de votre séjour et pouvoir
                 vous contacter rapidement en cas de nécessité liée à votre accueil.
               </p>
               <p>
-                L'Escapade Rangeoise s'engage formellement à ce que vos données ne soient{" "}
+                L&apos;Escapade Rangeoise s&apos;engage formellement à ce que vos données ne soient{" "}
                 <strong>jamais revendues, louées ou cédées</strong> à des entreprises tierces à des fins
                 de prospection commerciale. Pour assurer la sécurité de vos informations, nous mettons en
                 œuvre des mesures techniques et organisationnelles rigoureuses, conçues pour empêcher
@@ -102,10 +102,10 @@ export default function PolitiqueConfidentialitePage() {
             <Section title="3. Durée de conservation">
               <p>
                 Dans une démarche de minimisation, nous conservons vos informations uniquement le temps
-                nécessaire à l'accomplissement des finalités évoquées. Vos données personnelles sont
+                nécessaire à l&apos;accomplissement des finalités évoquées. Vos données personnelles sont
                 ainsi conservées pour une durée maximale de{" "}
                 <strong>trois ans</strong> à compter de la fin de votre dernier séjour ou de notre
-                dernier contact, avant d'être définitivement supprimées ou anonymisées.
+                dernier contact, avant d&apos;être définitivement supprimées ou anonymisées.
               </p>
             </Section>
 
@@ -133,7 +133,7 @@ export default function PolitiqueConfidentialitePage() {
                 ))}
               </div>
               <p className="mt-4">
-                Pour faire valoir l'un de ces droits, il vous suffit de nous adresser une demande écrite
+                Pour faire valoir l&apos;un de ces droits, il vous suffit de nous adresser une demande écrite
                 par courriel à{" "}
                 <a
                   href="mailto:contact@escapade-rangeoise.fr"
@@ -143,22 +143,22 @@ export default function PolitiqueConfidentialitePage() {
                 </a>
                 . Nous nous engageons à traiter votre requête dans les meilleurs délais. Par ailleurs,
                 si vous estimez après nous avoir contactés que vos droits ne sont pas respectés, vous
-                avez la possibilité d'introduire une réclamation officielle auprès de la{" "}
-                <strong>Commission Nationale de l'Informatique et des Libertés (CNIL)</strong>{" "}
+                avez la possibilité d&apos;introduire une réclamation officielle auprès de la{" "}
+                <strong>Commission Nationale de l&apos;Informatique et des Libertés (CNIL)</strong>{" "}
                 directement via leur site internet.
               </p>
             </Section>
 
             <Section title="5. Cookies">
               <p>
-                Concernant votre navigation sur notre site, nous tenons à vous assurer d'une expérience
-                respectueuse de votre tranquillité. L'Escapade Rangeoise a fait le choix de n'utiliser{" "}
+                Concernant votre navigation sur notre site, nous tenons à vous assurer d&apos;une expérience
+                respectueuse de votre tranquillité. L&apos;Escapade Rangeoise a fait le choix de n&apos;utiliser{" "}
                 <strong>aucun cookie ou traceur</strong> à des fins publicitaires, commerciales ou
-                d'analyse comportementale tierce.
+                d&apos;analyse comportementale tierce.
               </p>
               <p>
                 Seuls des cookies techniques, qui sont strictement indispensables au bon fonctionnement,
-                à l'affichage et à la sécurité de l'infrastructure du site, peuvent être déposés sur
+                à l&apos;affichage et à la sécurité de l&apos;infrastructure du site, peuvent être déposés sur
                 votre appareil. Ces éléments techniques sont neutres et ne collectent aucune donnée
                 personnelle permettant de vous identifier lors de votre visite.
               </p>

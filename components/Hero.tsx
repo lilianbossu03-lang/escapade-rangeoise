@@ -30,7 +30,7 @@ export default function Hero() {
           src="/hero.jpg"
           alt="Vue aérienne de Berck-sur-Mer, Côte d'Opale"
           className="w-full h-full object-cover scale-110"
-          // @ts-ignore
+          // @ts-expect-error — fetchpriority is valid HTML but not in React typings yet
           fetchpriority="high"
         />
       </motion.div>
@@ -49,7 +49,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <span className="inline-block text-gold font-lato text-sm font-semibold tracking-widest uppercase mb-4 border border-gold/50 px-4 py-1 rounded-full">
-            Côte d'Opale — Pas-de-Calais
+            Côte d&apos;Opale — Pas-de-Calais
           </span>
         </motion.div>
 
@@ -59,7 +59,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.4 }}
         >
-          L'Escapade
+          L&apos;Escapade
           <br />
           <span className="text-gold">Rangeoise</span>
         </motion.h1>
@@ -70,7 +70,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          Vos vacances sur la Côte d'Opale
+          Vos vacances sur la Côte d&apos;Opale
           <br />
           <span className="text-white/70 text-lg">
             À Rang-du-Fliers, entre mer et nature

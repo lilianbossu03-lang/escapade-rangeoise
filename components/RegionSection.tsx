@@ -21,7 +21,7 @@ export default function RegionSection({ region_points }: { region_points: Region
             À explorer
           </span>
           <h2 className="font-playfair text-4xl md:text-5xl text-white mt-2 mb-4">
-            La Côte d'Opale à votre portée
+            La Côte d&apos;Opale à votre portée
           </h2>
           <p className="font-lato text-white/70 max-w-2xl mx-auto text-lg">
             Entre falaises vertigineuses, plages infinies et villages pittoresques,
@@ -99,7 +99,7 @@ export default function RegionSection({ region_points }: { region_points: Region
                 Rang-du-Fliers — Votre base idéale
               </p>
               <p className="text-white/60 font-lato text-sm">
-                À 5 min de Berck, 20 min du Touquet, au cœur de la Côte d'Opale
+                À 5 min de Berck, 20 min du Touquet, au cœur de la Côte d&apos;Opale
               </p>
             </div>
           </div>

@@ -92,7 +92,7 @@ export default function ReservationForm({
         })
       );
     setBlockedDays(blocked);
-  }, [formData.logement_id]);
+  }, [formData.logement_id, dates_bloquees]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -170,7 +170,7 @@ export default function ReservationForm({
               été reçue.
             </p>
             <p className="font-lato text-gray-500 mb-8">
-              Je vous répondrai dans les 24h à l'adresse{" "}
+              Je vous répondrai dans les 24h à l&apos;adresse{" "}
               <strong>{formData.email}</strong> pour confirmer votre séjour.
             </p>
             {range?.from && range?.to && selectedLogement && (
@@ -651,7 +651,7 @@ export default function ReservationForm({
                 )}
               </button>
               <p className="text-center font-lato text-xs text-gray-500">
-                Réponse garantie sous 24h · Pas d'engagement
+                Réponse garantie sous 24h · Pas d&apos;engagement
               </p>
             </div>
           </div>

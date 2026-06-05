@@ -46,7 +46,7 @@ export default function EvenementsSection({ evenements }: { evenements: Evenemen
             Événements & Animations
           </h2>
           <p className="font-lato text-gray-600 max-w-2xl mx-auto text-lg">
-            La Côte d'Opale est une région vivante ! Festivals, marchés, randonnées...
+            La Côte d&apos;Opale est une région vivante ! Festivals, marchés, randonnées...
             Il se passe toujours quelque chose.
           </p>
         </motion.div>

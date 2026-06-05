@@ -70,7 +70,7 @@ export default function ProprietaireSection({ contenu_site }: { contenu_site: Pi
             <div className="relative bg-white rounded-2xl p-6 mb-6 shadow-sm border border-gold/20">
               <Quote className="w-8 h-8 text-gold/30 absolute top-4 left-4" />
               <p className="font-playfair text-lg text-primary italic pl-6 leading-relaxed">
-                Séjourner chez moi, c'est profiter d'un accès privilégié à la beauté sauvage de notre littoral et bénéficier de mes conseils locaux pour découvrir la région hors des sentiers battus.
+                Séjourner chez moi, c&apos;est profiter d&apos;un accès privilégié à la beauté sauvage de notre littoral et bénéficier de mes conseils locaux pour découvrir la région hors des sentiers battus.
               </p>
             </div>
 

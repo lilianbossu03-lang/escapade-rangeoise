@@ -103,10 +103,10 @@ export default function LogementDetail({ logement, dates_bloquees = [], periodes
             className="flex items-center gap-2 font-lato text-sm text-white/70 hover:text-white transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Link>
           <span className="font-playfair text-lg font-bold">
-            L'Escapade Rangeoise
+            L&apos;Escapade Rangeoise
           </span>
           <button
             onClick={handleReserve}
@@ -261,7 +261,9 @@ export default function LogementDetail({ logement, dates_bloquees = [], periodes
                       key={eq}
                       className="flex items-center gap-2 text-sm font-lato text-gray-700"
                     >
-                      <CheckCircle2 className="w-4 h-4 text-vert-sauge flex-shrink-0" />
+                      <span className="text-vert-sauge flex-shrink-0">
+                        {equipementIcons[eq] ?? <CheckCircle2 className="w-4 h-4" />}
+                      </span>
                       {eq}
                     </div>
                   ))}

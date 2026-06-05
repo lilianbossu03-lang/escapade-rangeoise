@@ -37,7 +37,7 @@ export default function LoginPage() {
           <div className="inline-flex items-center gap-2 mb-3">
             <Anchor className="w-8 h-8 text-gold" />
             <span className="font-playfair text-2xl font-bold text-primary">
-              L'Escapade Rangeoise
+              L&apos;Escapade Rangeoise
             </span>
           </div>
           <p className="font-lato text-sm text-gray-500">Espace administration</p>
@@ -107,7 +107,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-center font-lato text-xs text-gray-400 mt-6">
-          Accès réservé à l'administratrice du site
+          Accès réservé à l&apos;administratrice du site
         </p>
       </div>
     </div>

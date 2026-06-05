@@ -60,6 +60,8 @@ function LogementCard({ logement }: { logement: Logement }) {
 // ── Main carousel ─────────────────────────────────────────────────────────────
 export default function LogementsCarrousel({ logements }: { logements: Logement[] }) {
   const REAL = logements.length;
+  // TOTAL kept for readability: REAL + CLONE * 2 — not used in logic currently
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const TOTAL = REAL + CLONE * 2;
   const START = CLONE;
   const ext: Logement[] = [
@@ -170,7 +172,7 @@ export default function LogementsCarrousel({ logements }: { logements: Logement[
         <motion.div className="text-center mb-14" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
           <span className="text-gold font-lato text-sm font-semibold tracking-widest uppercase">Nos hébergements</span>
           <h2 className="font-playfair text-4xl md:text-5xl text-primary mt-2 mb-4">Choisissez votre nid</h2>
-          <p className="font-lato text-gray-600 max-w-2xl mx-auto text-lg">Cinq logements soigneusement aménagés pour vous offrir le meilleur des vacances sur la Côte d'Opale.</p>
+          <p className="font-lato text-gray-600 max-w-2xl mx-auto text-lg">Cinq logements soigneusement aménagés pour vous offrir le meilleur des vacances sur la Côte d&apos;Opale.</p>
         </motion.div>
 
         <div className="relative">

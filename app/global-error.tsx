@@ -18,7 +18,7 @@ export default function GlobalError({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Erreur — L'Escapade Rangeoise</title>
+        <title>Erreur — L&apos;Escapade Rangeoise</title>
       </head>
       <body
         style={{
@@ -46,7 +46,7 @@ export default function GlobalError({
               marginBottom: 32,
             }}
           >
-            L'Escapade Rangeoise
+            L&apos;Escapade Rangeoise
           </p>
 
           {/* Icon triangle */}
@@ -98,8 +98,8 @@ export default function GlobalError({
               margin: "0 0 32px",
             }}
           >
-            Quelque chose n'a pas fonctionné. Essayez de recharger la page ou
-            revenez à l'accueil.
+            Quelque chose n&apos;a pas fonctionné. Essayez de recharger la page ou
+            revenez à l&apos;accueil.
           </p>
 
           {error.digest && (
@@ -144,7 +144,7 @@ export default function GlobalError({
                 alignItems: "center",
               }}
             >
-              Retour à l'accueil
+              Retour à l&apos;accueil
             </a>
           </div>
         </div>

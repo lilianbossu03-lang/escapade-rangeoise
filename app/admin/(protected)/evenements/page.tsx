@@ -1,6 +1,6 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createEvenement, deleteEvenement } from "@/app/admin/actions";
-import { PartyPopper, Trash2, Plus, MapPin, Calendar } from "lucide-react";
+import { PartyPopper, Trash2, Plus, MapPin } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { fr } from "date-fns/locale";
 
@@ -78,7 +78,7 @@ export default async function EvenementsAdminPage() {
             </div>
           </div>
           <button type="submit" className="bg-primary text-white font-lato text-sm font-semibold px-6 py-2.5 rounded-xl hover:bg-secondary transition-colors">
-            Ajouter l'événement
+            Ajouter l&apos;événement
           </button>
         </form>
       </div>

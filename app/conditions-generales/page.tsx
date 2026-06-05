@@ -22,7 +22,7 @@ export default function ConditionsGeneralesPage() {
             className="inline-flex items-center gap-1.5 font-lato text-sm text-gray-400 hover:text-primary transition-colors mb-8"
           >
             <ChevronLeft className="w-4 h-4" />
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Link>
 
           {/* Header */}
@@ -32,7 +32,7 @@ export default function ConditionsGeneralesPage() {
             </div>
             <div>
               <p className="font-lato text-xs text-gray-400 uppercase tracking-widest">
-                L'Escapade Rangeoise
+                L&apos;Escapade Rangeoise
               </p>
               <h1 className="font-playfair text-3xl text-primary">
                 Conditions générales de location
@@ -43,34 +43,34 @@ export default function ConditionsGeneralesPage() {
           <div className="space-y-8">
             <p className="font-lato text-gray-600 leading-relaxed">
               Les présentes conditions générales régissent toute réservation effectuée pour un séjour
-              à L'Escapade Rangeoise. En validant une demande de réservation, le voyageur reconnaît
+              à L&apos;Escapade Rangeoise. En validant une demande de réservation, le voyageur reconnaît
               avoir pris connaissance de ces conditions et les accepter sans réserve. Ce document vise
-              à garantir un séjour serein et transparent, tant pour les voyageurs que pour l'hôte.
+              à garantir un séjour serein et transparent, tant pour les voyageurs que pour l&apos;hôte.
             </p>
 
             <Section title="1. Objet">
               <p>
-                L'Escapade Rangeoise propose à la location des hébergements meublés de tourisme situés
+                L&apos;Escapade Rangeoise propose à la location des hébergements meublés de tourisme situés
                 à Rang-du-Fliers, dans le Pas-de-Calais, destinés à des séjours de courte durée et à
-                titre non professionnel. Le contrat de location saisonnière est conclu entre l'hôte,
-                représentant L'Escapade Rangeoise, et le voyageur principal effectuant la réservation.
+                titre non professionnel. Le contrat de location saisonnière est conclu entre l&apos;hôte,
+                représentant L&apos;Escapade Rangeoise, et le voyageur principal effectuant la réservation.
               </p>
             </Section>
 
             <Section title="2. Réservation">
               <p>
-                Toute demande de séjour est soumise à l'approbation préalable de l'hôte. Le processus
-                de réservation s'effectue en ligne ou par échange de courriels. La réservation n'est
-                considérée comme ferme et définitive qu'à compter de la réception d'une confirmation
-                écrite de la part de l'hôte et de l'encaissement effectif de l'acompte requis.
+                Toute demande de séjour est soumise à l&apos;approbation préalable de l&apos;hôte. Le processus
+                de réservation s&apos;effectue en ligne ou par échange de courriels. La réservation n&apos;est
+                considérée comme ferme et définitive qu&apos;à compter de la réception d&apos;une confirmation
+                écrite de la part de l&apos;hôte et de l&apos;encaissement effectif de l&apos;acompte requis.
               </p>
             </Section>
 
             <Section title="3. Tarifs et paiement">
               <p>
-                Les tarifs indiqués s'entendent en euros et incluent les charges courantes telles que
-                l'eau, l'électricité et le chauffage, dans la limite d'une consommation raisonnable et
-                écoresponsable. Ces prix n'incluent pas la taxe de séjour, qui est calculée selon la
+                Les tarifs indiqués s&apos;entendent en euros et incluent les charges courantes telles que
+                l&apos;eau, l&apos;électricité et le chauffage, dans la limite d&apos;une consommation raisonnable et
+                écoresponsable. Ces prix n&apos;incluent pas la taxe de séjour, qui est calculée selon la
                 réglementation de la commune et facturée en supplément.
               </p>
               <div className="bg-sand/40 border border-sand rounded-xl p-5 mt-2 space-y-2">
@@ -80,7 +80,7 @@ export default function ConditionsGeneralesPage() {
                 </div>
                 <div className="flex gap-2 font-lato text-sm">
                   <span className="text-gray-500 min-w-[100px]">Solde :</span>
-                  <span className="text-primary font-medium">70 % restants, dû au plus tard 30 jours avant l'arrivée</span>
+                  <span className="text-primary font-medium">70 % restants, dû au plus tard 30 jours avant l&apos;arrivée</span>
                 </div>
                 <div className="flex gap-2 font-lato text-sm">
                   <span className="text-gray-500 min-w-[100px]">Paiement :</span>
@@ -91,27 +91,27 @@ export default function ConditionsGeneralesPage() {
 
             <Section title="4. Dépôt de garantie">
               <p>
-                Afin de garantir le respect des lieux, un dépôt de garantie d'un montant de{" "}
+                Afin de garantir le respect des lieux, un dépôt de garantie d&apos;un montant de{" "}
                 <strong>300 euros</strong> est demandé lors de la remise des clés. Cette caution sera
                 restituée au voyageur dans un délai maximum de sept jours suivant son départ, sous
-                réserve qu'aucune dégradation ne soit constatée lors de l'état des lieux de sortie. En
-                cas de dommages matériels ou de nécessité d'un nettoyage exceptionnel, les frais
-                correspondants seront déduits de ce dépôt, factures à l'appui.
+                réserve qu&apos;aucune dégradation ne soit constatée lors de l&apos;état des lieux de sortie. En
+                cas de dommages matériels ou de nécessité d&apos;un nettoyage exceptionnel, les frais
+                correspondants seront déduits de ce dépôt, factures à l&apos;appui.
               </p>
             </Section>
 
             <Section title="5. Durée et occupation">
               <p>
                 Le logement est loué pour une durée déterminée lors de la réservation et pour un nombre
-                strict de voyageurs. Le voyageur principal s'engage à occuper les lieux personnellement.
+                strict de voyageurs. Le voyageur principal s&apos;engage à occuper les lieux personnellement.
                 La présence de toute personne supplémentaire non déclarée lors de la réservation
-                constitue une rupture du contrat et pourra entraîner l'annulation immédiate du séjour
-                sans qu'aucun remboursement ne puisse être exigé.
+                constitue une rupture du contrat et pourra entraîner l&apos;annulation immédiate du séjour
+                sans qu&apos;aucun remboursement ne puisse être exigé.
               </p>
               <p>
-                Les arrivées s'effectuent à partir de <strong>16h00</strong> et les départs doivent
+                Les arrivées s&apos;effectuent à partir de <strong>16h00</strong> et les départs doivent
                 avoir lieu au plus tard à <strong>10h00</strong>, sauf dérogation accordée expressément
-                par l'hôte.
+                par l&apos;hôte.
               </p>
             </Section>
 
@@ -140,43 +140,43 @@ export default function ConditionsGeneralesPage() {
               </div>
               <p className="mt-3">
                 Il est ainsi vivement recommandé aux voyageurs de souscrire une assurance annulation
-                indépendante. Si l'annulation est contrainte et à l'initiative de l'hôte, le voyageur
+                indépendante. Si l&apos;annulation est contrainte et à l&apos;initiative de l&apos;hôte, le voyageur
                 sera immédiatement et intégralement remboursé des sommes versées.
               </p>
             </Section>
 
             <Section title="7. Obligations du voyageur">
               <p>
-                Pendant la durée de son séjour, le voyageur s'engage à jouir des lieux de manière
+                Pendant la durée de son séjour, le voyageur s&apos;engage à jouir des lieux de manière
                 paisible et raisonnable. Le logement est strictement <strong>non-fumeur en intérieur</strong>.
-                Afin de préserver la tranquillité du voisinage, l'organisation de fêtes ou d'événements
+                Afin de préserver la tranquillité du voisinage, l&apos;organisation de fêtes ou d&apos;événements
                 est formellement interdite, et le calme doit être respecté entre <strong>22h00 et 8h00</strong>.
               </p>
               <p>
-                Tout dysfonctionnement ou dommage matériel doit être signalé à l'hôte dans les plus
-                brefs délais. À l'issue du séjour, le logement doit être restitué dans un état de
-                propreté correct, similaire à celui de l'arrivée. Par ailleurs, les animaux de compagnie
-                ne sont admis qu'après l'obtention d'un accord préalable et écrit de l'hôte.
+                Tout dysfonctionnement ou dommage matériel doit être signalé à l&apos;hôte dans les plus
+                brefs délais. À l&apos;issue du séjour, le logement doit être restitué dans un état de
+                propreté correct, similaire à celui de l&apos;arrivée. Par ailleurs, les animaux de compagnie
+                ne sont admis qu&apos;après l&apos;obtention d&apos;un accord préalable et écrit de l&apos;hôte.
               </p>
             </Section>
 
             <Section title="8. Responsabilité">
               <p>
-                La responsabilité de l'hôte ne saurait être engagée en cas de dommages directs ou
+                La responsabilité de l&apos;hôte ne saurait être engagée en cas de dommages directs ou
                 indirects subis par le voyageur ou ses biens personnels durant la location, notamment en
                 cas de vol, de dégradations liées aux intempéries ou de force majeure. Le voyageur
                 assume la pleine responsabilité des dommages causés au logement ou à ses équipements par
-                lui-même ou par les personnes qui l'accompagnent. Il lui est conseillé de s'assurer que
-                sa police d'assurance habitation inclut une garantie responsabilité civile villégiature.
+                lui-même ou par les personnes qui l&apos;accompagnent. Il lui est conseillé de s&apos;assurer que
+                sa police d&apos;assurance habitation inclut une garantie responsabilité civile villégiature.
               </p>
             </Section>
 
             <Section title="9. Litiges">
               <p>
-                En cas de différend relatif à l'interprétation ou à l'exécution des présentes
-                conditions, l'hôte et le voyageur s'engagent à privilégier une résolution amiable. Si
+                En cas de différend relatif à l&apos;interprétation ou à l&apos;exécution des présentes
+                conditions, l&apos;hôte et le voyageur s&apos;engagent à privilégier une résolution amiable. Si
                 aucun accord ne peut être trouvé, le litige sera porté devant les juridictions
-                compétentes du ressort de la ville d'<strong>Arras</strong>, dans le Pas-de-Calais, et
+                compétentes du ressort de la ville d&apos;<strong>Arras</strong>, dans le Pas-de-Calais, et
                 sera soumis à la législation française en vigueur.
               </p>
             </Section>

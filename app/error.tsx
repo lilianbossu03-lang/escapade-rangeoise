@@ -57,9 +57,9 @@ export default function Error({
           className="font-lato text-gray-600 text-base leading-relaxed mb-8"
           style={{ fontFamily: "var(--font-lato, system-ui, sans-serif)" }}
         >
-          Quelque chose n'a pas fonctionné comme prévu. Ce n'est pas de votre
+          Quelque chose n&apos;a pas fonctionné comme prévu. Ce n&apos;est pas de votre
           faute — nous travaillons à remettre tout en ordre. En attendant,
-          essayez de recharger la page ou revenez à l'accueil.
+          essayez de recharger la page ou revenez à l&apos;accueil.
         </p>
 
         {/* Digest discret */}
@@ -83,7 +83,7 @@ export default function Error({
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-primary/30 text-primary font-semibold px-8 py-3.5 rounded-full hover:border-primary transition-all duration-200 min-h-[44px]"
             style={{ fontFamily: "var(--font-lato, system-ui, sans-serif)" }}
           >
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </a>
         </div>
       </div>

@@ -42,7 +42,7 @@ export default function NotFound() {
             >
               <path d="m15 18-6-6 6-6" />
             </svg>
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Link>
         </div>
       </header>
@@ -80,7 +80,7 @@ export default function NotFound() {
 
             {/* Title */}
             <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl text-primary font-bold leading-tight mb-5">
-              Cette page s'est perdue
+              Cette page s&apos;est perdue
               <br />
               <span className="italic font-normal text-2xl sm:text-3xl md:text-4xl">
                 dans les dunes
@@ -89,8 +89,8 @@ export default function NotFound() {
 
             {/* Subtitle */}
             <p className="font-lato text-gray-600 text-base sm:text-lg leading-relaxed mb-10 max-w-lg mx-auto">
-              La page que vous cherchez n'existe pas ou a été déplacée. Mais ne
-              partez pas — il y a tant à découvrir sur la Côte d'Opale.
+              La page que vous cherchez n&apos;existe pas ou a été déplacée. Mais ne
+              partez pas — il y a tant à découvrir sur la Côte d&apos;Opale.
             </p>
 
             {/* CTAs */}
@@ -99,7 +99,7 @@ export default function NotFound() {
                 href="/"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gold text-primary font-lato font-semibold px-8 py-3.5 rounded-full hover:bg-[#cc9430] transition-all duration-200 hover:scale-105 min-h-[44px]"
               >
-                Retour à l'accueil
+                Retour à l&apos;accueil
               </Link>
               <Link
                 href="/#logements"

@@ -284,7 +284,7 @@ export default function TarifsEditor({ logements, initialPeriodes }: Props) {
           {lPeriodes.length === 0 ? (
             <div className="px-5 py-8 text-center">
               <p className="font-lato text-sm text-gray-400">
-                Aucune période — le prix de base s'applique à toutes les dates.
+                Aucune période — le prix de base s&apos;applique à toutes les dates.
               </p>
             </div>
           ) : (

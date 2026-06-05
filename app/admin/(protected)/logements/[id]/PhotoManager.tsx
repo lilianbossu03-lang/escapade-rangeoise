@@ -153,7 +153,7 @@ export default function PhotoManager({ logementId, initialPhotos, initialPrincip
       ) : (
         <>
           <p className="font-lato text-xs text-gray-400 mb-3">
-            Glissez pour réorganiser · L'étoile indique la photo principale
+            Glissez pour réorganiser · L&apos;étoile indique la photo principale
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {photos.map((url, idx) => (

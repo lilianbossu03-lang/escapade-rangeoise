@@ -178,7 +178,7 @@ export default async function ExplorerSlugPage({ params }: Props) {
                   </Link>
                   <Link href="/#region" className="flex items-center justify-center gap-2 border border-white/30 text-white/80 font-lato text-sm px-5 py-3 rounded-full hover:bg-white/10 transition-all w-full">
                     <Clock className="w-4 h-4" />
-                    Voir d'autres suggestions
+                    Voir d&apos;autres suggestions
                   </Link>
                 </div>
               </div>

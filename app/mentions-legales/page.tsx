@@ -21,7 +21,7 @@ export default function MentionsLegalesPage() {
             className="inline-flex items-center gap-1.5 font-lato text-sm text-gray-400 hover:text-primary transition-colors mb-8"
           >
             <ChevronLeft className="w-4 h-4" />
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Link>
 
           {/* Header */}
@@ -31,7 +31,7 @@ export default function MentionsLegalesPage() {
             </div>
             <div>
               <p className="font-lato text-xs text-gray-400 uppercase tracking-widest">
-                L'Escapade Rangeoise
+                L&apos;Escapade Rangeoise
               </p>
               <h1 className="font-playfair text-3xl text-primary">
                 Mentions légales
@@ -43,13 +43,13 @@ export default function MentionsLegalesPage() {
             <Section title="Éditeur du site">
               <p>
                 Le présent site internet est édité par la société{" "}
-                <strong>L'ESCAPADE RANGEOISE</strong>, une Société par Actions Simplifiée au capital
+                <strong>L&apos;ESCAPADE RANGEOISE</strong>, une Société par Actions Simplifiée au capital
                 social de 1 000 euros. Son siège social est domicilié au{" "}
                 <strong>40 Avenue Jean Moulin, 62180 Rang-du-Fliers</strong>.
               </p>
               <p>
                 La société est immatriculée au Registre National des Entreprises sous le numéro SIREN{" "}
-                <strong>998 946 099</strong>, et l'établissement est identifié par le numéro de SIRET{" "}
+                <strong>998 946 099</strong>, et l&apos;établissement est identifié par le numéro de SIRET{" "}
                 <strong>998 946 099 00012</strong>. Son numéro de TVA intracommunautaire est le{" "}
                 <strong>FR29 998 946 099</strong>.
               </p>
@@ -59,7 +59,7 @@ export default function MentionsLegalesPage() {
               <p>
                 La directrice de la publication du présent site web est{" "}
                 <strong>Sandra BOSSU</strong>, agissant en qualité de dirigeante et représentante légale
-                de L'Escapade Rangeoise. Pour toute question, demande d'information ou de réservation,
+                de L&apos;Escapade Rangeoise. Pour toute question, demande d&apos;information ou de réservation,
                 vous pouvez la contacter directement :
               </p>
               <div className="bg-sand/40 rounded-xl p-5 mt-3 space-y-2">
@@ -86,26 +86,26 @@ export default function MentionsLegalesPage() {
 
             <Section title="Hébergement">
               <p>
-                L'hébergement technique de ce site internet est assuré par la société{" "}
+                L&apos;hébergement technique de ce site internet est assuré par la société{" "}
                 <strong>Vercel Inc.</strong> Le siège social de cet hébergeur est situé au{" "}
                 340 Pine Street, Suite 701, San Francisco, CA 94104, États-Unis. Pour toute question
-                relative à l'infrastructure informatique du site, vous pouvez contacter directement cet
-                hébergeur via son site internet officiel accessible à l'adresse{" "}
+                relative à l&apos;infrastructure informatique du site, vous pouvez contacter directement cet
+                hébergeur via son site internet officiel accessible à l&apos;adresse{" "}
                 <span className="text-primary font-medium">vercel.com</span>.
               </p>
             </Section>
 
             <Section title="Propriété intellectuelle">
               <p>
-                L'ensemble des éléments constituant ce site internet, incluant de façon non limitative
+                L&apos;ensemble des éléments constituant ce site internet, incluant de façon non limitative
                 sa structure générale, ses textes, ses photographies, son identité visuelle et ses logos,
-                relèvent de la législation française et internationale sur le droit d'auteur et la
-                propriété intellectuelle. Ces éléments sont la propriété exclusive de L'Escapade
+                relèvent de la législation française et internationale sur le droit d&apos;auteur et la
+                propriété intellectuelle. Ces éléments sont la propriété exclusive de L&apos;Escapade
                 Rangeoise.
               </p>
               <p>
                 Toute représentation, reproduction, modification ou exploitation totale ou partielle de
-                ce site et de son contenu sans l'autorisation expresse et préalable de la société est
+                ce site et de son contenu sans l&apos;autorisation expresse et préalable de la société est
                 formellement interdite et constituerait une contrefaçon sanctionnée par le Code de la
                 propriété intellectuelle.
               </p>
@@ -120,16 +120,16 @@ export default function MentionsLegalesPage() {
 
             <Section title="Données personnelles">
               <p>
-                Dans le cadre de l'utilisation de ce site et notamment lors de l'utilisation des
-                formulaires de contact ou de réservation, L'Escapade Rangeoise est amenée à collecter et
+                Dans le cadre de l&apos;utilisation de ce site et notamment lors de l&apos;utilisation des
+                formulaires de contact ou de réservation, L&apos;Escapade Rangeoise est amenée à collecter et
                 à traiter certaines de vos données personnelles. Ce traitement est effectué dans le plus
                 strict respect du Règlement Général sur la Protection des Données et de la loi
                 Informatique et Libertés.
               </p>
               <p>
                 Ces informations sont exclusivement réservées à la gestion de vos demandes et de vos
-                séjours. Conformément à la réglementation en vigueur, vous disposez d'un droit d'accès,
-                de rectification, de portabilité, d'effacement de vos données ou d'une limitation du
+                séjours. Conformément à la réglementation en vigueur, vous disposez d&apos;un droit d&apos;accès,
+                de rectification, de portabilité, d&apos;effacement de vos données ou d&apos;une limitation du
                 traitement, que vous pouvez exercer à tout moment en contactant la directrice de la
                 publication aux coordonnées indiquées ci-dessus.
               </p>

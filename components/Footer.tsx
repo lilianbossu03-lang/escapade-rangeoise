@@ -45,12 +45,12 @@ export default async function Footer() {
                 className="h-12 w-12 flex-shrink-0"
               />
               <span className="font-playfair text-lg leading-tight text-white">
-                L'Escapade<br />Rangeoise
+                L&apos;Escapade<br />Rangeoise
               </span>
             </div>
             <p className="font-lato text-white/60 text-sm leading-relaxed mb-6">
               Locations de vacances authentiques à Rang-du-Fliers, sur la
-              magnifique Côte d'Opale.
+              magnifique Côte d&apos;Opale.
             </p>
             {airbnb_url && (
               <a
@@ -166,10 +166,10 @@ export default async function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-lato text-xs text-white/40">
-            © {new Date().getFullYear()} L'Escapade Rangeoise. Tous droits réservés.
+            © {new Date().getFullYear()} L&apos;Escapade Rangeoise. Tous droits réservés.
           </p>
           <p className="font-lato text-xs text-white/40 flex items-center gap-1">
-            Fait avec <Heart className="w-3 h-3 text-gold fill-gold" /> sur la Côte d'Opale
+            Fait avec <Heart className="w-3 h-3 text-gold fill-gold" /> sur la Côte d&apos;Opale
           </p>
         </div>
       </div>
